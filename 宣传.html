@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="light">
+<head>
+<script>(function(){try{if(window.location.protocol==='file:'&&localStorage.getItem('YuNi_User')&&localStorage.getItem('authToken')){window.location.replace('主面板.html');}}catch(e){}})();</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="屿你 - 连接每一次心动。Apple级设计，流畅社交体验。">
+<meta name="author" content="YuNi Team">
+<meta property="og:title" content="屿你 YuNi — 连接每一次心动">
+<meta property="og:description" content="极简、流畅、安全。屿你为追求品质的你打造，在这里用最自然的方式遇见有趣灵魂。">
+<meta property="og:image" content="内置文件/照片/2.png" width="240" height="480">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="屿你 YuNi — 连接每一次心动">
+<meta name="twitter:description" content="极简、流畅、安全的社交体验">
+<meta name="twitter:image" content="内置文件/照片/2.png">
+<meta name="theme-color" content="#f5f0eb">
+<title>屿你 YuNi - 连接每一次心动</title>
+<style>
+/* 屿你 YuNi - Apple Design System v5 + PPT Mode */
+:root{--bg-p:#fafaf8;--bg-s:#f5f0eb;--bg-el:#fff;--txt-p:#1a1615;--txt-s:#5c5552;--txt-t:#8a827e;--ac:#2563eb;--ac-s:rgba(37,99,235,.07);--gr-hero:none;--gr-ac:linear-gradient(135deg,#2563eb 0%,#6366f1 100%);--r-sm:12px;--r-md:18px;--r-lg:24px;--r-xl:32px;--r-full:9999px;--sh-sm:0 1px 2px rgba(0,0,0,.04);--sh-md:0 4px 16px rgba(0,0,0,.06);--sh-lg:0 8px 32px rgba(0,0,0,.1);--sh-xl:0 20px 60px rgba(0,0,0,.15);--gl-bg:rgba(255,255,255,.72);--gl-bd:rgba(255,255,255,.35);--gl-bl:blur(20px) saturate(180%);--fn:-apple-system,BlinkMacSystemFont,"SF Pro Display","PingFang SC","Helvetica Neue",sans-serif;--es:cubic-bezier(.22,1,.36,1);--d1:.12s;--d2:.25s;--d3:.4s;--d4:.6s;--mw:1200px;--spring:cubic-bezier(0.34,1.56,0.64,1)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto;-webkit-font-smoothing:antialiased;overflow-x:hidden;overflow-y:auto}
+html::-webkit-scrollbar{display:none}
+html{scrollbar-width:none;-ms-overflow-style:none}
+body{font-family:var(--fn);background:transparent;color:var(--txt-p);line-height:1.6;overflow-x:hidden;position:relative;z-index:1}
+body.ppt-active{overflow:hidden}
+::selection{background:var(--ac-s);color:var(--ac)}
+h1,h2,h3{font-weight:600;letter-spacing:-.02em;line-height:1.15}
+h1{font-size:clamp(36px,6vw,60px);letter-spacing:-.03em}
+h2{font-size:clamp(24px,3.5vw,40px)}
+h3{font-size:clamp(16px,2vw,22px)}
+p{color:var(--txt-s);font-size:16px;line-height:1.7}
+a{color:inherit;text-decoration:none}
+.cx{width:100%;max-width:var(--mw);margin:0 auto;padding:0 24px}
+.sec{padding:80px 0;position:relative;z-index:1}
+.tc{text-align:center}
+.grad{background:var(--gr-ac);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* ====== SCROLL MODE: BG ====== */
+.bg-animated{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(135deg,#e0c3fc 0%,#8ec5fc 50%,#fbc2eb 100%);background-size:400% 400%;animation:bgShift 12s ease-in-out infinite;will-change:background-position}
+@keyframes bgShift{0%,100%{background-position:0% 50%}25%{background-position:100% 0%}50%{background-position:100% 100%}75%{background-position:0% 100%}}
+
+/* ====== SCROLL MODE: BUTTONS ====== */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 28px;border-radius:var(--r-full);font-size:15px;font-weight:500;cursor:pointer;border:none;font-family:var(--fn);white-space:nowrap;position:relative;overflow:hidden;transition:transform .3s var(--es),box-shadow .3s var(--es);-webkit-tap-highlight-color:transparent}
+.btn::after{content:'';position:absolute;inset:0;border-radius:inherit;opacity:0;transition:opacity .4s}
+.btn:active::after{opacity:.1;background:#000}
+.btn-p{background:#1a1615;color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.1)}
+.btn-p:hover{background:#2d2624;transform:translateY(-2px) scale(1.02);box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.btn-p:active{transform:scale(.95)}
+.btn-s{background:var(--gl-bg);color:var(--txt-p);border:1px solid var(--gl-bd);backdrop-filter:var(--gl-bl);-webkit-backdrop-filter:var(--gl-bl)}
+.btn-s:hover{background:rgba(255,255,255,.9);border-color:rgba(0,0,0,.12);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.btn-s:active{transform:scale(.95)}
+.btn-lg{padding:15px 34px;font-size:17px}
+
+/* ====== SCROLL MODE: NAV ====== */
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);z-index:1000;transition:all .5s var(--es)}
+.nav-bar{display:flex;align-items:center;gap:2px;padding:6px 16px;height:42px;width:fit-content;background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.35) 100%);backdrop-filter:blur(24px) saturate(200%);-webkit-backdrop-filter:blur(24px) saturate(200%);border-radius:var(--r-full);box-shadow:0 0 0 1px rgba(255,255,255,.45),0 0 0 2px rgba(255,255,255,.12),0 4px 20px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.6);transition:all .5s var(--es);pointer-events:auto;max-width:calc(100vw - 24px)}
+.nav-scrolled{top:6px;transition:all .5s var(--es)}.nav-scrolled .nav-bar{height:44px;padding:5px 14px;gap:3px;background:linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,.5) 100%);backdrop-filter:blur(30px) saturate(220%);-webkit-backdrop-filter:blur(30px) saturate(220%);box-shadow:0 0 0 1px rgba(255,255,255,.55),0 0 0 3px rgba(255,255,255,.18),0 8px 36px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.7)}
+.nav-logo{display:flex;align-items:center;gap:7px;padding:4px 12px 4px 6px;font-weight:650;font-size:15px;letter-spacing:-.02em;color:var(--txt-p);transition:all .5s var(--es);flex-shrink:0;border-radius:var(--r-full)}
+.nav-logo-text{transition:all .5s var(--es)}
+.nav-logo-icon{width:28px;height:28px;border-radius:7px;background:var(--gr-ac);display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;font-weight:700;flex-shrink:0;transition:all .5s var(--es)}
+.nav-links{display:flex;align-items:center;gap:1px;overflow:hidden;opacity:1;transition:all .5s var(--es)}
+.nav-scrolled .nav-links{opacity:1}
+.nav-links a{padding:6px 13px;border-radius:var(--r-full);color:var(--txt-s);font-size:13px;font-weight:500;white-space:nowrap;transition:all .25s var(--es);border:1px solid transparent}
+.nav-links a:hover{color:var(--txt-p);background:rgba(0,0,0,.05)}
+.nav-cta{margin-left:4px;padding:6px 16px;border-radius:var(--r-full);background:linear-gradient(135deg,#1a1615 0%,#2d2624 100%);color:#fff!important;font-size:13px;font-weight:600;transition:all .3s var(--es);box-shadow:0 2px 8px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.15);white-space:nowrap;flex-shrink:0}
+.nav-cta:hover{transform:scale(1.05);box-shadow:0 4px 14px rgba(0,0,0,.18);background:#2d2624!important}
+.nav-cta:active{transform:scale(.94)}
+.nav-mb{display:none;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.04);border:none;cursor:pointer;align-items:center;justify-content:center;color:var(--txt-p);flex-shrink:0;transition:all .25s var(--es)}
+.nav-mb:hover{background:rgba(0,0,0,.08)}
+.nav-mb svg{width:16px;height:16px}
+
+/* ====== SCROLL MODE: HERO ====== */
+.hero{position:relative;padding:140px 0 60px;background:transparent;overflow:visible;min-height:100vh;display:flex;align-items:center}
+.hero-ct{position:relative;z-index:2;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;padding:6px 16px;border-radius:var(--r-full);color:var(--ac);font-size:12px;font-weight:600;margin-bottom:20px;cursor:default;background:linear-gradient(135deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.3) 100%);backdrop-filter:blur(10px) saturate(150%);-webkit-backdrop-filter:blur(10px) saturate(150%);box-shadow:0 0 0 1px rgba(255,255,255,.4),0 0 0 2px rgba(255,255,255,.1),0 2px 8px rgba(0,0,0,.03),inset 0 1px 0 rgba(255,255,255,.55)}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--ac);animation:breath 2.5s ease-in-out infinite;box-shadow:0 0 0 0 rgba(37,99,235,.4)}
+@keyframes breath{0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.4)}60%{box-shadow:0 0 0 8px rgba(37,99,235,0)}}
+.hero-h1{font-size:clamp(36px,7vw,64px);font-weight:700;letter-spacing:-.04em;line-height:1.1;margin-bottom:16px}
+.hero-p{font-size:clamp(15px,1.6vw,18px);color:var(--txt-s);max-width:500px;margin:0 auto 28px}
+.hero-btn{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.hero-mock{position:relative;margin-top:40px}
+.hero-imgw{max-width:700px;margin:0 auto;perspective:1000px;border-radius:var(--r-lg);overflow:hidden;cursor:pointer;box-shadow:0 0 0 1px rgba(255,255,255,.3),0 0 0 4px rgba(255,255,255,.08),0 8px 40px rgba(0,0,0,.12)}
+.hero-imgw img{width:100%;height:auto;display:block;border-radius:var(--r-lg);box-shadow:var(--sh-xl);transition:transform .6s var(--es)}
+
+/* Orbit tags: satellite ring */
+.hero-orbit{position:absolute;inset:0;pointer-events:none;z-index:4}
+.orbit-tag{position:absolute;display:inline-flex;align-items:center;gap:5px;padding:7px 15px;border-radius:var(--r-full);font-size:12px;font-weight:500;color:var(--txt-s);white-space:nowrap;opacity:0;pointer-events:auto;background:linear-gradient(135deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.3) 100%);backdrop-filter:blur(16px) saturate(160%);-webkit-backdrop-filter:blur(16px) saturate(160%);box-shadow:0 0 0 1px rgba(255,255,255,.45),0 0 0 2px rgba(255,255,255,.1),0 2px 8px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,.55);transition:transform .35s var(--es),box-shadow .35s var(--es)}
+.orbit-tag:hover{transform:translateY(-2px) scale(1.04);box-shadow:0 0 0 1px rgba(255,255,255,.6),0 0 0 3px rgba(255,255,255,.18),0 6px 18px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.65);color:var(--txt-p)}
+.orbit-tl{top:38%;left:4%}
+.orbit-tr{top:36%;right:4%}
+.orbit-ml{top:52%;left:1%}
+.orbit-mr{top:50%;right:1%}
+.orbit-bl{bottom:4%;left:6%}
+.orbit-br{bottom:5%;right:6%}
+
+/* ====== SCROLL MODE: STATS ====== */
+.stats{position:relative;z-index:3;margin-top:-24px;padding:0 24px}
+.stats-g{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;max-width:var(--mw);margin:0 auto}
+.stat-c{text-align:center;padding:32px 20px;border-radius:var(--r-lg);cursor:default;transition:all var(--d3) var(--es);background:linear-gradient(180deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.3) 100%);backdrop-filter:blur(12px) saturate(140%);-webkit-backdrop-filter:blur(12px) saturate(140%);box-shadow:0 0 0 1px rgba(255,255,255,.45),0 0 0 2px rgba(255,255,255,.12),0 4px 16px rgba(0,0,0,.04),inset 0 1px 0 rgba(255,255,255,.55)}
+.stat-c:hover{transform:translateY(-4px);box-shadow:0 0 0 1px rgba(255,255,255,.65),0 0 0 3px rgba(255,255,255,.2),0 12px 36px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.7);background:linear-gradient(180deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,.45) 100%)}
+.stat-c:active{transform:scale(.97)}
+.stat-n{font-size:clamp(24px,3vw,38px);font-weight:700;letter-spacing:-.03em;margin-bottom:2px;background:var(--gr-ac);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-l{font-size:13px;color:var(--txt-t);font-weight:500}
+.sl{font-size:11px;font-weight:600;color:var(--ac);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.stl{margin-bottom:12px}
+.sd{max-width:540px;margin:0 auto 48px;font-size:16px;color:var(--txt-s)}
+
+/* ====== SCROLL MODE: FEATURES ====== */
+.fg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.fc{padding:36px 28px;border-radius:var(--r-lg);position:relative;overflow:hidden;transition:all var(--d3) var(--es);background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.35) 100%);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);box-shadow:0 0 0 1px rgba(255,255,255,.5),0 0 0 2px rgba(255,255,255,.15),0 4px 20px rgba(0,0,0,.05),inset 0 1px 0 rgba(255,255,255,.6);cursor:pointer}
+.fc::before{content:'';position:absolute;inset:0;background:var(--gr-ac);opacity:0;transition:opacity .5s var(--es);z-index:0}
+.fc:hover::before{opacity:.02}
+.fc:hover{transform:translateY(-6px);box-shadow:0 0 0 1px rgba(255,255,255,.65),0 0 0 3px rgba(255,255,255,.2),0 12px 40px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.7);background:linear-gradient(135deg,rgba(255,255,255,.7) 0%,rgba(255,255,255,.5) 100%)}
+.fc:active{transform:translateY(-2px) scale(.98)}
+.fci{width:44px;height:44px;border-radius:var(--r-sm);background:var(--ac-s);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:20px;position:relative;z-index:1;transition:transform .3s var(--es)}
+.fc:hover .fci{transform:scale(1.1)}
+.fc::after{content:'';position:absolute;bottom:0;left:8px;right:8px;height:1px;background:linear-gradient(90deg,transparent,rgba(0,0,0,.04),transparent);z-index:0}
+.fc h3{font-size:17px;margin-bottom:6px;position:relative;z-index:1}
+.fc p{font-size:14px;color:var(--txt-s);position:relative;z-index:1;line-height:1.6}
+
+/* ====== SCROLL MODE: TIMELINE ====== */
+.history{background:transparent;overflow:hidden}
+.timeline{position:relative;max-width:880px;margin:0 auto;padding:30px 0}
+.timeline::before{content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;background:#1a1615;border-radius:2px;transform:translateX(-50%);opacity:.15}
+.t-step{position:relative;display:flex;align-items:center;margin-bottom:56px}
+.t-step:last-child{margin-bottom:0}
+.t-step:nth-child(odd){flex-direction:row}
+.t-step:nth-child(even){flex-direction:row-reverse}
+.t-step-dot{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:18px;height:18px;border-radius:50%;background:#1a1615;border:4px solid var(--bg-p);box-shadow:0 0 0 5px rgba(26,22,21,.1);z-index:2}
+.t-step-card{width:43%;padding:28px 32px;border-radius:var(--r-lg);cursor:pointer;transition:all .35s var(--es);background:linear-gradient(135deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.35) 100%);backdrop-filter:blur(14px) saturate(150%);-webkit-backdrop-filter:blur(14px) saturate(150%);box-shadow:0 0 0 1px rgba(255,255,255,.5),0 0 0 2px rgba(255,255,255,.15),0 4px 20px rgba(0,0,0,.05),inset 0 1px 0 rgba(255,255,255,.55)}
+.t-step-card:hover{transform:translateY(-5px);box-shadow:0 0 0 1px rgba(255,255,255,.65),0 0 0 3px rgba(255,255,255,.2),0 12px 40px rgba(0,0,0,.1),inset 0 1px 0 rgba(255,255,255,.7);background:linear-gradient(135deg,rgba(255,255,255,.72) 0%,rgba(255,255,255,.5) 100%)}
+.t-step-card:active{transform:scale(.98)}
+.t-step-num{font-size:48px;font-weight:800;color:var(--ac-s);line-height:1;margin-bottom:8px;letter-spacing:-.03em}
+.t-step-card h3{font-size:18px;margin-bottom:6px}
+.t-step-card p{font-size:14px;color:var(--txt-s);line-height:1.6}
+.t-step-icon{font-size:28px;margin-bottom:12px}
+
+/* ====== SCROLL MODE: SHOWCASE ====== */
+.showcase{background:transparent;overflow:hidden}
+.sv{display:flex;align-items:center;justify-content:center;gap:32px;padding:24px 0}
+.sp{flex:0 0 auto;max-width:240px;border-radius:28px;overflow:hidden;transition:all var(--d4) var(--es);transform:rotate(-2deg);cursor:pointer;background:rgba(255,255,255,.5);backdrop-filter:blur(10px) saturate(140%);-webkit-backdrop-filter:blur(10px) saturate(140%);box-shadow:0 0 0 1px rgba(255,255,255,.45),0 0 0 3px rgba(255,255,255,.12),0 8px 32px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.5)}
+.sp:nth-child(2){transform:rotate(3deg);margin-top:-16px}
+.sp:hover{transform:rotate(0) scale(1.05)!important;z-index:2;box-shadow:0 20px 60px rgba(0,0,0,.2)}
+.sp:active{transform:rotate(0) scale(1.02)!important}
+.sp img{width:100%;height:auto;display:block}
+.sdots{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:20px}
+.sdot{width:7px;height:7px;border-radius:50%;background:var(--txt-t);opacity:.35;transition:all .3s var(--es)}
+.sdot.active{background:#1a1615;opacity:.8;width:22px;border-radius:4px}
+
+/* ====== SCROLL MODE: COMMUNITY ====== */
+.cv{max-width:560px;margin:48px auto 0}
+.ci{border-radius:var(--r-lg);overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.08);cursor:pointer;transition:all .35s var(--es)}
+.ci:hover{box-shadow:0 12px 40px rgba(0,0,0,.15);transform:translateY(-3px)}
+.ci:active{transform:scale(.98)}
+.ci img{width:100%;height:auto;display:block}
+.cavs{display:flex;align-items:center;justify-content:center;margin:24px 0;padding:12px 4px}
+.cav{position:relative;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;font-size:15px;cursor:pointer;flex-shrink:0;isolation:isolate;transition:transform .3s var(--es),box-shadow .3s var(--es)}
+.cav:nth-child(1){background:linear-gradient(135deg,#6366f1,#a855f7)}
+.cav:nth-child(2){background:linear-gradient(135deg,#3b82f6,#6366f1);margin-left:-10px}
+.cav:nth-child(3){background:linear-gradient(135deg,#2563eb,#3b82f6);margin-left:-10px}
+.cav:nth-child(4){background:linear-gradient(135deg,#6366f1,#8b5cf6);margin-left:-10px}
+.cav:nth-child(5){background:linear-gradient(135deg,#3b82f6,#6366f1);margin-left:-10px}
+.cav:nth-child(6){background:linear-gradient(135deg,#a855f7,#6366f1);margin-left:-10px}
+.cav:nth-child(7){background:linear-gradient(135deg,#94a3b8,#64748b);margin-left:-10px;font-size:13px}
+.cav:hover{transform:translateY(-4px) scale(1.15);box-shadow:0 8px 24px rgba(37,99,235,.2)}
+.cav:active{transform:scale(.95)}
+
+/* ====== SCROLL MODE: CTA ====== */
+.cta-glass{max-width:600px;margin:0 auto;padding:48px 40px;text-align:center;border-radius:var(--r-lg);background:linear-gradient(180deg,rgba(255,255,255,.55) 0%,rgba(255,255,255,.35) 100%);backdrop-filter:blur(18px) saturate(160%);-webkit-backdrop-filter:blur(18px) saturate(160%);box-shadow:0 0 0 1px rgba(255,255,255,.5),0 0 0 2px rgba(255,255,255,.15),0 8px 40px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.6)}
+.cta-sec{position:relative;text-align:center;overflow:visible;background:transparent}
+
+/* ====== SCROLL MODE: FOOTER ====== */
+.ft{border-top:1px solid var(--gl-bd);background:transparent;padding:48px 0 32px}
+.ft-g{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px}
+.ft-logo{display:flex;align-items:center;gap:8px;margin-bottom:12px;font-size:19px;font-weight:700;color:var(--txt-p)}
+.ft-desc{font-size:13px;color:var(--txt-t);max-width:250px;line-height:1.6}
+.ft-col h4{font-size:12px;color:var(--txt-p);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.ft-col a{display:block;color:var(--txt-t);font-size:13px;padding:4px 0;transition:all .2s var(--es)}
+.ft-col a:hover{color:var(--txt-p);padding-left:4px}
+.ft-bot{margin-top:40px;padding-top:20px;border-top:1px solid var(--gl-bd);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:12px;color:var(--txt-t)}
+
+/* ====== SCROLL MODE: MOBILE MENU ====== */
+.mm{position:fixed;inset:0;z-index:999;pointer-events:none;opacity:0;transition:opacity .35s var(--es)}
+.mm.open{pointer-events:auto;opacity:1}
+.mm-bg{position:absolute;inset:0;background:rgba(0,0,0,.25);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.mm-p{position:absolute;top:12px;right:12px;left:12px;background:linear-gradient(180deg,rgba(255,255,255,.6) 0%,rgba(255,255,255,.4) 100%);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-radius:20px;padding:32px 24px;box-shadow:0 0 0 1px rgba(255,255,255,.4),0 0 0 2px rgba(255,255,255,.1),0 20px 60px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.5);transform:translateY(-8px) scale(.97);transition:all .35s var(--es)}
+.mm.open .mm-p{transform:translateY(0) scale(1)}
+.mm a{display:block;padding:12px 14px;border-radius:12px;color:var(--txt-p);font-size:16px;font-weight:500;transition:background .2s var(--es)}
+.mm a:hover{background:rgba(0,0,0,.04)}
+.mm a:active{background:rgba(0,0,0,.08)}
+
+/* ====== MODAL ====== */
+.modal-overlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.25);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);opacity:0;pointer-events:none;visibility:hidden;transition:opacity .35s var(--es),visibility .35s var(--es)}
+.modal-overlay.open{opacity:1!important;pointer-events:auto!important;visibility:visible!important}
+.modal-panel{position:relative;width:90vw;max-width:440px;max-height:80vh;overflow-y:auto;border-radius:var(--r-xl);padding:36px 32px;background:linear-gradient(180deg,rgba(255,255,255,.65) 0%,rgba(255,255,255,.45) 100%);backdrop-filter:blur(30px) saturate(200%);-webkit-backdrop-filter:blur(30px) saturate(200%);box-shadow:0 0 0 1px rgba(255,255,255,.5),0 0 0 3px rgba(255,255,255,.15),0 24px 80px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.65);transform:translateY(20px) scale(.96);transition:transform .4s var(--es)}
+.modal-overlay.open .modal-panel{transform:translateY(0) scale(1)!important}
+.modal-close{position:absolute;top:16px;right:16px;width:32px;height:32px;border-radius:50%;border:none;background:rgba(0,0,0,.05);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:var(--txt-t);transition:all .2s var(--es)}
+.modal-close:hover{background:rgba(0,0,0,.1);color:var(--txt-p)}
+.modal-panel h3{font-size:20px;margin-bottom:8px}
+.modal-panel p{font-size:14px;color:var(--txt-s);margin-bottom:20px;line-height:1.7}
+.modal-panel .highlight-box{display:flex;align-items:center;gap:10px;padding:14px 18px;border-radius:var(--r-md);background:rgba(255,255,255,.5);border:1px solid rgba(0,0,0,.06);margin-bottom:20px;font-size:15px;font-weight:600;color:var(--txt-p);font-family:var(--fn)}
+.modal-panel .highlight-box code{flex:1;font-size:15px;background:none;color:var(--ac);word-break:break-all}
+.modal-btn-row{display:flex;gap:10px;flex-wrap:wrap}
+.modal-btn{display:inline-flex;align-items:center;gap:6px;padding:10px 22px;border-radius:var(--r-full);font-size:14px;font-weight:600;cursor:pointer;border:none;font-family:var(--fn);transition:all .25s var(--es)}
+.modal-btn-primary{background:#1a1615;color:#fff}
+.modal-btn-primary:hover{background:#2d2624;transform:scale(1.03)}
+.modal-btn-primary:active{transform:scale(.96)}
+.modal-btn-ghost{background:rgba(255,255,255,.5);color:var(--txt-p);border:1px solid rgba(0,0,0,.08)}
+.modal-btn-ghost:hover{background:rgba(255,255,255,.7)}
+.copied-feedback{font-size:12px;color:var(--ac);opacity:0;transition:opacity .3s}
+.copied-feedback.show{opacity:1}
+
+/* ====== PPT MODE ====== */
+#pptMode{position:fixed;inset:0;z-index:100000;opacity:0;pointer-events:none;visibility:hidden;transition:opacity .5s var(--es),visibility .5s var(--es)}
+#pptMode.ppt-active{opacity:1!important;pointer-events:auto!important;visibility:visible!important}
+
+.ppt-bg-layer{position:fixed;inset:0;z-index:0;background:linear-gradient(135deg,#e0c3fc 0%,#8ec5fc 50%,#fbc2eb 100%)}
+.ppt-bg-layer.dark-shift{background:linear-gradient(135deg,#1a1a2e 0%,#16213e 30%,#0f3460 60%,#1a1a2e 100%)}
+.ppt-orb{position:fixed;border-radius:50%;z-index:1;pointer-events:none;filter:blur(80px);opacity:.5;animation:pptOrbFloat 20s ease-in-out infinite}
+@keyframes pptOrbFloat{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(8vw,-6vh) scale(1.3)}50%{transform:translate(-5vw,10vh) scale(.8)}75%{transform:translate(-10vw,-3vh) scale(1.2)}}
+.ppt-orb-1{width:40vmax;height:40vmax;top:-20%;left:-10%;background:radial-gradient(circle,rgba(0,122,255,.4),transparent);animation-delay:0s}
+.ppt-orb-2{width:35vmax;height:35vmax;bottom:-15%;right:-8%;background:radial-gradient(circle,rgba(255,59,48,.3),transparent);animation-delay:-7s}
+.ppt-orb-3{width:30vmax;height:30vmax;top:40%;left:60%;background:radial-gradient(circle,rgba(52,199,89,.25),transparent);animation-delay:-14s}
+.ppt-particles{position:fixed;inset:0;z-index:2;pointer-events:none}
+.ppt-particle{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;animation:pptSparkle 6s ease-in-out infinite}
+@keyframes pptSparkle{0%,100%{opacity:0;transform:translateY(0) scale(0)}15%{opacity:1}30%{opacity:0;transform:translateY(-120px) scale(1.5)}}
+
+.ppt-slides-wrapper{position:fixed;inset:0;z-index:10;transition:transform .9s var(--spring)}
+.ppt-slide{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:30px 50px;opacity:0;transform:scale(.92);transition:opacity .7s cubic-bezier(.4,0,.2,1),transform .7s var(--spring);pointer-events:none;overflow:hidden}
+.ppt-slide.active{opacity:1;transform:scale(1);pointer-events:auto;z-index:1}
+.ppt-slide.exit-up{opacity:0;transform:scale(.9) translateY(-60px);transition:opacity .5s cubic-bezier(0,0,.2,1),transform .5s cubic-bezier(0,0,.2,1)}
+.ppt-slide.exit-down{opacity:0;transform:scale(.9) translateY(60px);transition:opacity .5s cubic-bezier(0,0,.2,1),transform .5s cubic-bezier(0,0,.2,1)}
+.ppt-slide-inner{width:100%;max-width:1100px;display:flex;flex-direction:column;gap:20px;position:relative;z-index:2}
+
+.ppt-h1{font-size:clamp(48px,6vw,88px);font-weight:900;letter-spacing:-.03em;line-height:1.05;color:#1a1a2e}
+.ppt-h1 .ppt-accent{color:#007aff}
+.ppt-h2{font-size:clamp(36px,4vw,56px);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.ppt-h3{font-size:clamp(20px,2.5vw,28px);font-weight:600;letter-spacing:-.01em}
+.ppt-body{font-size:clamp(16px,1.8vw,20px);font-weight:400;line-height:1.7;color:#636366;max-width:600px}
+.ppt-body-lg{font-size:clamp(18px,2.2vw,26px);font-weight:300;line-height:1.6}
+.ppt-mono{font-family:'SF Mono','Cascadia Code',monospace;font-size:14px;color:#007aff;letter-spacing:.04em;text-transform:uppercase}
+.ppt-txt-center{text-align:center}
+
+.ppt-glass{background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(40px);-webkit-backdrop-filter:blur(40px);border-radius:28px;padding:40px;box-shadow:0 8px 32px rgba(0,0,0,.07);transition:all .5s var(--spring)}
+.ppt-glass:hover{background:rgba(255,255,255,.65);box-shadow:0 20px 60px rgba(0,0,0,.12);transform:translateY(-4px)}
+.ppt-glass-sm{padding:24px;border-radius:20px}
+.ppt-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;border-radius:100px;border:none;font-family:inherit;font-size:16px;font-weight:600;cursor:pointer;transition:all .35s var(--spring);text-decoration:none}
+.ppt-btn-primary{background:#007aff;color:#fff;box-shadow:0 4px 16px rgba(0,122,255,.35)}
+.ppt-btn-primary:hover{transform:scale(1.06);box-shadow:0 8px 28px rgba(0,122,255,.5)}
+.ppt-btn-glass{background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(20px);color:#1a1a2e}
+.ppt-btn-glass:hover{background:rgba(255,255,255,.65);transform:scale(1.04)}
+.ppt-row{display:flex;gap:24px;align-items:center}
+.ppt-col{display:flex;flex-direction:column;gap:12px}
+.ppt-col-2{flex:1;min-width:0;overflow:hidden}
+.ppt-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.ppt-grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ppt-grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+
+.ppt-screenshot-wrap{position:relative;border-radius:28px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.12);background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.28);transition:all .6s var(--spring);max-width:100%;display:flex;align-items:center;justify-content:center}
+.ppt-screenshot-wrap:hover{transform:scale(1.02);box-shadow:0 40px 80px rgba(0,0,0,.18)}
+.ppt-screenshot-wrap img{display:block;max-width:100%;max-height:55vh;width:auto;height:auto;transition:transform .6s cubic-bezier(.4,0,.2,1)}
+.ppt-screenshot-wrap:hover img{transform:scale(1.04)}
+.ppt-stat-card{text-align:center;padding:32px 20px}
+.ppt-stat-card .ppt-num{font-size:clamp(36px,5vw,60px);font-weight:900;background:linear-gradient(135deg,#007aff,#5856d6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ppt-stat-card .ppt-label{font-size:14px;color:#636366;margin-top:8px}
+.ppt-feature-icon{width:56px;height:56px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;background:rgba(0,122,255,.12);color:#007aff;margin-bottom:12px}
+.ppt-platform-card{text-align:center;padding:40px 28px;border-radius:28px;background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(40px);transition:all .5s var(--spring);cursor:default}
+.ppt-platform-card:hover{transform:translateY(-8px) scale(1.03);box-shadow:0 20px 60px rgba(0,0,0,.12)}
+.ppt-platform-icon{font-size:56px;margin-bottom:16px}
+.ppt-tech-badge{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:100px;background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.28);font-size:14px;font-weight:500;backdrop-filter:blur(12px)}
+
+.ppt-nav-dots{position:fixed;right:28px;top:50%;transform:translateY(-50%);z-index:100;display:flex;flex-direction:column;gap:12px}
+.ppt-nav-dot{width:10px;height:10px;border-radius:50%;background:rgba(0,0,0,.2);border:2px solid transparent;cursor:pointer;transition:all .4s var(--spring)}
+.ppt-nav-dot.active{background:#007aff;border-color:rgba(0,122,255,.4);box-shadow:0 0 16px rgba(0,122,255,.5);width:12px;height:12px;margin-left:-1px}
+.ppt-nav-dot:hover{background:#007aff;transform:scale(1.3)}
+.ppt-page-counter{position:fixed;bottom:32px;right:36px;z-index:100;font-size:13px;font-weight:500;color:#636366;font-feature-settings:'tnum'}
+.ppt-page-counter span{font-size:28px;font-weight:700;color:#007aff}
+.ppt-key-hint{position:fixed;bottom:32px;left:36px;z-index:100;display:flex;gap:8px;align-items:center;opacity:.6;transition:opacity .3s;color:#636366;font-size:14px}
+.ppt-key-hint kbd{padding:4px 10px;border-radius:6px;background:rgba(255,255,255,.45);border:1px solid rgba(255,255,255,.28);font-family:inherit;font-size:12px;color:#636366}
+
+.ppt-close-btn{position:fixed;top:18px;left:50%;transform:translateX(-50%);z-index:110;padding:8px 22px;border-radius:100px;border:none;cursor:pointer;font-family:inherit;font-size:14px;font-weight:600;color:#1a1a2e;background:rgba(255,255,255,.55);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);box-shadow:0 0 0 1px rgba(255,255,255,.4),0 4px 12px rgba(0,0,0,.06);transition:all .3s var(--es)}
+.ppt-close-btn:hover{background:rgba(255,255,255,.75);transform:translateX(-50%) scale(1.04);box-shadow:0 6px 20px rgba(0,0,0,.1)}
+.ppt-close-btn:active{transform:translateX(-50%) scale(.96)}
+
+.ppt-hero-logo{font-size:clamp(80px,12vw,160px);font-weight:900;letter-spacing:-.04em;background:linear-gradient(135deg,#007aff 0%,#5856d6 40%,#ff2d55 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:pptHeroPulse 4s ease-in-out infinite}
+@keyframes pptHeroPulse{0%,100%{filter:brightness(1) drop-shadow(0 0 30px rgba(0,122,255,.4))}50%{filter:brightness(1.2) drop-shadow(0 0 60px rgba(88,86,214,.6))}}
+
+.ppt-reveal-up{opacity:0;transform:translateY(40px);animation:pptRevealUp .8s var(--spring) forwards}
+.ppt-reveal-left{opacity:0;transform:translateX(-40px);animation:pptRevealLeft .8s var(--spring) forwards}
+.ppt-reveal-right{opacity:0;transform:translateX(40px);animation:pptRevealRight .8s var(--spring) forwards}
+.ppt-reveal-scale{opacity:0;transform:scale(.8);animation:pptRevealScale .8s var(--spring) forwards}
+@keyframes pptRevealUp{to{opacity:1;transform:translateY(0)}}
+@keyframes pptRevealLeft{to{opacity:1;transform:translateX(0)}}
+@keyframes pptRevealRight{to{opacity:1;transform:translateX(0)}}
+@keyframes pptRevealScale{to{opacity:1;transform:scale(1)}}
+.ppt-d1{animation-delay:.05s}.ppt-d2{animation-delay:.15s}.ppt-d3{animation-delay:.28s}.ppt-d4{animation-delay:.42s}
+.ppt-d5{animation-delay:.56s}.ppt-d6{animation-delay:.7s}.ppt-d7{animation-delay:.85s}.ppt-d8{animation-delay:1s}
+
+/* Chat bubbles for PPT */
+.ppt-chat-bubble-left{align-self:flex-start;background:rgba(0,0,0,.06);padding:10px 16px;border-radius:18px 18px 18px 4px;font-size:14px;max-width:70%}
+.ppt-chat-bubble-right{align-self:flex-end;background:#007aff;color:#fff;padding:10px 16px;border-radius:18px 18px 4px 18px;font-size:14px;max-width:70%}
+.ppt-chat-input{flex:1;padding:10px 16px;border-radius:100px;border:1px solid rgba(0,0,0,.1);background:rgba(0,0,0,.04);font-family:inherit;font-size:14px}
+
+/* ====== RESPONSIVE ====== */
+@media(max-width:960px){.fg{grid-template-columns:repeat(2,1fr)}.ft-g{grid-template-columns:1fr 1fr}.sp{max-width:200px}.t-step-card{width:40%}}
+@media(max-width:768px){
+ .bg-animated{animation:none}.nav{left:12px;right:12px;transform:none;top:8px}.nav-scrolled{top:6px}.nav-bar{width:100%;justify-content:space-between}
+ .nav-links,.nav-cta,.nav-scrolled .nav-links,.nav-scrolled .nav-cta{display:none}.nav-mb{display:flex}.stats-g{grid-template-columns:repeat(2,1fr)}
+ .orbit-tag{padding:5px 10px;font-size:10px}.orbit-tl{top:34%;left:1%}.orbit-tr{top:33%;right:1%}.orbit-ml{top:46%;left:0}.orbit-mr{top:45%;right:0}.orbit-bl{bottom:2%;left:2%}.orbit-br{bottom:3%;right:2%}
+ .timeline::before{left:24px}.t-step,.t-step:nth-child(even){flex-direction:row}.t-step-dot{left:24px}.t-step-card{width:calc(100% - 56px);margin-left:48px}
+ .ppt-slide{padding:40px 24px}.ppt-grid-2,.ppt-grid-3{grid-template-columns:1fr}.ppt-grid-4{grid-template-columns:1fr 1fr}.ppt-row{flex-direction:column}.ppt-nav-dots{right:12px;gap:8px}.ppt-h1{font-size:36px}.ppt-h2{font-size:28px}
+}
+@media(max-width:600px){.fg{grid-template-columns:1fr}.ft-g{grid-template-columns:1fr}.sv{flex-direction:column}.sp{max-width:200px}.sp:nth-child(2){margin-top:-40px}.hero-h1{font-size:32px}.stats-g{grid-template-columns:1fr 1fr;gap:8px}.sec{padding:48px 0}.t-step-card{width:calc(100% - 44px);padding:20px}}
+</style>
+</head>
+<body>
+
+<!-- SCROLL MODE -->
+<div id="scrollMode">
+<div class="bg-animated"></div>
+
+<nav class="nav" id="nav"><div class="nav-bar">
+  <a href="#" class="nav-logo"><span class="nav-logo-icon">Y</span><span class="nav-logo-text">屿你</span></a>
+  <div class="nav-links">
+    <a href="#features">功能</a><a href="#history">历程</a><a href="#showcase">展示</a><a href="#community">社区</a>
+    <a href="javascript:void(0)" class="nav-cta" onclick="switchToPPT()">开始使用</a>
+  </div>
+  <button class="nav-mb" id="menuBtn" aria-label="菜单"><svg viewBox="0 0 20 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h16M2 8h16M2 13h16"/></svg></button>
+</div></nav>
+
+<div class="mm" id="mobileMenu"><div class="mm-bg" id="menuBg"></div><div class="mm-p">
+  <a href="#features">功能特性</a><a href="#history">屿你历程</a><a href="#showcase">产品展示</a><a href="#community">社区</a><a href="#">帮助中心</a>
+  <a href="javascript:void(0)" style="color:var(--ac);font-weight:600" onclick="switchToPPT()">开始使用</a>
+</div></div>
+
+<section class="hero">
+  <!-- Orbital tags: satellite ring around the hero mockup -->
+  <div class="hero-orbit">
+    <span class="orbit-tag orbit-tl gs-orb">瞬时触达</span>
+    <span class="orbit-tag orbit-tr gs-orb">美学重构</span>
+    <span class="orbit-tag orbit-ml gs-orb">纯净守护</span>
+    <span class="orbit-tag orbit-mr gs-orb">全端覆盖</span>
+    <span class="orbit-tag orbit-bl gs-orb">实时聊天</span>
+    <span class="orbit-tag orbit-br gs-orb">评分 4.9</span>
+  </div>
+  <div class="cx" style="position:relative;z-index:2">
+    <div class="hero-ct">
+      <div class="hero-badge"><span class="hero-badge-dot"></span>由 YuNi 团队开发</div>
+      <h1 class="hero-h1 gs-hero-h1">屿你<br><span class="grad">连接每一次心动</span></h1>
+      <p class="hero-p gs-hero-p">极简、流畅、安全。屿你为追求品质的你打造，在这里用最自然的方式遇见有趣灵魂。</p>
+      <div class="hero-btn gs-hero-btn"><a href="javascript:void(0)" class="btn btn-p btn-lg gs-btn" onclick="switchToPPT()">立即体验</a><a href="#features" class="btn btn-s btn-lg gs-btn">了解更多</a></div>
+    </div>
+    <div class="hero-mock gs-mock"><div class="hero-imgw" id="heroImgWrap"><img src="内置文件/照片/2.png" alt="屿你界面预览" loading="eager" width="700" height="400"></div></div>
+  </div>
+</section>
+
+<div class="stats"><div class="stats-g">
+  <div class="stat-c gs-stat"><div class="stat-n"><span data-count="15000">0</span>+</div><div class="stat-l">注册用户</div></div>
+  <div class="stat-c gs-stat"><div class="stat-n"><span data-count="500000">0</span>+</div><div class="stat-l">消息发送</div></div>
+  <div class="stat-c gs-stat"><div class="stat-n"><span data-count="99.9">0</span>%</div><div class="stat-l">服务可用率</div></div>
+  <div class="stat-c gs-stat"><div class="stat-n"><span data-count="1000">0</span>+</div><div class="stat-l">活跃社群</div></div>
+</div></div>
+
+<section class="sec" id="features"><div class="cx">
+  <div class="tc"><div class="sl gs-sec">核心功能</div><h2 class="stl gs-sec">为每一份<span class="grad">连接</span>而设计</h2><p class="sd gs-sec">屿你的每个功能都经过精心打磨，像你期待的那样简洁优雅。</p></div>
+  <div class="fg">
+    <div class="fc gs-card"><div class="fci">💬</div><h3>实时聊天</h3><p>端到端加密，消息毫秒级送达。支持文字、图片、语音多种形式。</p></div>
+    <div class="fc gs-card"><div class="fci">&#x1f3e0;</div><h3>个人主页</h3><p>自定义壁纸、音乐、签名。打造属于你的独特空间，展示最真实的自己。</p></div>
+    <div class="fc gs-card"><div class="fci">&#x1f310;</div><h3>动态广场</h3><p>发现身边的精彩。点赞、评论、分享，与志同道合的人建立连接。</p></div>
+    <div class="fc gs-card"><div class="fci">&#x1f512;</div><h3>隐私安全</h3><p>你的数据你做主。精细的权限控制，确保每一次分享都在你的掌握之中。</p></div>
+    <div class="fc gs-card"><div class="fci">&#x1f3a8;</div><h3>精美主题</h3><p>深色/浅色模式自由切换。Liquid Glass 设计，每一处都赏心悦目。</p></div>
+    <div class="fc gs-card"><div class="fci">&#x1f4f1;</div><h3>全平台覆盖</h3><p>Web、Windows、Android 全覆盖。PWA 支持，添加到桌面即用。</p></div>
+  </div>
+</div></section>
+
+<section class="sec history" id="history"><div class="cx">
+  <div class="tc"><div class="sl gs-sec">发展历程</div><h2 class="stl gs-sec">一路走来<span class="grad">屿你</span>的故事</h2><p class="sd gs-sec">从第一个想法到现在，每一步都值得被记住。</p></div>
+  <div class="timeline">
+    <div class="t-step gs-tl"><div class="t-step-dot"></div><div class="t-step-card"><div class="t-step-icon">&#x1f331;</div><div class="t-step-num">01</div><h3>项目诞生</h3><p>2024年夏天，一群热爱社交产品的人决定做出改变。屿你从一个简单的想法开始。</p></div></div>
+    <div class="t-step gs-tl"><div class="t-step-dot"></div><div class="t-step-card"><div class="t-step-icon">&#x1f527;</div><div class="t-step-num">02</div><h3>内测打磨</h3><p>经过6个月的精心开发，屿你迎来了第一批100位内测用户。每一次反馈都让产品变得更好。</p></div></div>
+    <div class="t-step gs-tl"><div class="t-step-dot"></div><div class="t-step-card"><div class="t-step-icon">&#x1f680;</div><div class="t-step-num">03</div><h3>正式启航</h3><p>2025年春天，屿你正式上线。Apple级的设计语言加上流畅的体验，迅速吸引了数千名用户。</p></div></div>
+    <div class="t-step gs-tl"><div class="t-step-dot"></div><div class="t-step-card"><div class="t-step-icon">&#x1f31f;</div><div class="t-step-num">04</div><h3>持续成长</h3><p>如今屿你已覆盖 Web、Windows、Android 三大平台，服务15,000+用户。我们的故事，才刚刚开始。</p></div></div>
+  </div>
+</div></section>
+
+<section class="sec showcase" id="showcase"><div class="cx">
+  <div class="tc"><div class="sl gs-sec">产品展示</div><h2 class="stl gs-sec">赏心悦目的<span class="grad">交互体验</span></h2><p class="sd gs-sec">每个像素都经过打磨。iPhone 级流畅动画，Apple 级视觉设计。</p></div>
+  <div class="sv">
+    <div class="sp gs-sp"><img src="内置文件/照片/3.png" alt="屿你界面" loading="lazy" width="240" height="480"></div>
+    <div class="sp gs-sp"><img src="内置文件/照片/2.png" alt="屿你界面" loading="lazy"></div>
+  </div>
+  <div class="sdots"><span class="sdot active"></span><span class="sdot"></span><span class="sdot"></span><span class="sdot"></span></div>
+</div></section>
+
+<section class="sec" id="community"><div class="cx">
+  <div class="tc"><div class="sl gs-sec">社区</div><h2 class="stl gs-sec">加入我们的<span class="grad">大家庭</span></h2><p class="sd gs-sec">数千名用户已经在屿你找到了属于他们的连接方式。</p></div>
+  <div class="cv gs-comm">
+    <div class="ci"><img src="内置文件/照片/4.png" alt="屿你社区" loading="lazy" width="560" height="360"></div>
+    <div class="cavs">
+      <div class="cav gs-cav">Y</div><div class="cav gs-cav">N</div><div class="cav gs-cav">i</div><div class="cav gs-cav">Y</div><div class="cav gs-cav">u</div><div class="cav gs-cav">+</div>
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--txt-t)">和 <strong style="color:var(--txt-p)">15,000+</strong> 用户一起，开启屿你之旅</p>
+  </div>
+</div></section>
+
+<section class="sec cta-sec"><div class="cx">
+  <div class="cta-glass gs-sec">
+    <h2 class="stl" style="margin-bottom:12px">准备好<span class="grad">屿你</span>相遇了吗？</h2>
+    <p style="font-size:17px;color:var(--txt-s);margin-bottom:28px;max-width:460px;margin-left:auto;margin-right:auto">现在就加入屿你，体验 Apple 级别的社交感受。极简、流畅、安全。</p>
+    <div style="display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap"><a href="javascript:void(0)" class="btn btn-p btn-lg gs-btn" onclick="switchToPPT()">免费注册</a><a href="javascript:void(0)" class="btn btn-s btn-lg gs-btn" data-modal="download" onclick="event.preventDefault();window.openModal('download')">下载客户端</a></div>
+  </div>
+</div></section>
+
+<footer class="ft gs-foot"><div class="cx"><div class="ft-g">
+  <div><div class="ft-logo"><span class="nav-logo-icon">Y</span>屿你 YuNi</div><p class="ft-desc">连接每一次心动。Apple 级社交体验，为你而设计。由 Czy 与团队倾心打造。</p></div>
+  <div class="ft-col"><h4>导航</h4><a href="#features">功能特性</a><a href="#history">发展历程</a><a href="#showcase">产品展示</a><a href="#community">社区</a></div>
+  <div class="ft-col"><h4>支持</h4><a href="javascript:void(0)" data-modal="help" onclick="event.preventDefault();window.openModal('help')">帮助中心</a><a href="javascript:void(0)" data-modal="feedback" onclick="event.preventDefault();window.openModal('feedback')">反馈建议</a><a href="javascript:void(0)" data-modal="privacy" onclick="event.preventDefault();window.openModal('privacy')">隐私政策</a><a href="javascript:void(0)" data-modal="terms" onclick="event.preventDefault();window.openModal('terms')">服务条款</a></div>
+  <div class="ft-col"><h4>联系</h4><a href="javascript:void(0)" data-modal="about" onclick="event.preventDefault();window.openModal('about')">关于我们</a><a href="javascript:void(0)" data-modal="join" onclick="event.preventDefault();window.openModal('join')">加入团队</a><a href="javascript:void(0)" data-modal="qq" onclick="event.preventDefault();window.openModal('qq')">官方QQ群: 1103666883</a><a href="javascript:void(0)" data-modal="email" onclick="event.preventDefault();window.openModal('email')">czy001@pythonanywhere.com</a></div>
+</div><div class="ft-bot"><span>&copy; 2026 屿你 YuNi. All rights reserved.</span><span>Made with love by YuNi Team</span></div></div></footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal-panel" id="modalPanel">
+    <button class="modal-close" id="modalClose">&times;</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+</div><!-- /scrollMode -->
+
+<!-- PPT MODE -->
+<div id="pptMode">
+<div class="ppt-bg-layer" id="bgLayer"></div>
+<div class="ppt-orb ppt-orb-1"></div><div class="ppt-orb ppt-orb-2"></div><div class="ppt-orb ppt-orb-3"></div>
+<div class="ppt-particles" id="particles"></div>
+<button class="ppt-close-btn" onclick="switchToScroll()" title="返回">返回</button>
+<nav class="ppt-nav-dots" id="navDots"></nav>
+<div class="ppt-page-counter"><span id="curPage">01</span> / <span id="totPage">20</span></div>
+<div class="ppt-key-hint"><kbd>ESC</kbd> 返回</div>
+
+<div class="ppt-slides-wrapper" id="slidesWrapper">
+
+<section class="ppt-slide active" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">YU NI - SOCIAL PLATFORM</div>
+  <h1 class="ppt-hero-logo ppt-reveal-scale ppt-d2">屿你</h1>
+  <p class="ppt-body-lg ppt-reveal-up ppt-d3" style="max-width:680px;margin:0 auto;">连接每一个有趣的灵魂<br>以 Apple 设计语言打造的下一代社交体验</p>
+  <div class="ppt-reveal-up ppt-d4" style="margin-top:8px;"><span class="ppt-tech-badge">Web PWA</span><span class="ppt-tech-badge" style="margin-left:8px;">Windows EXE</span><span class="ppt-tech-badge" style="margin-left:8px;">Android APK</span></div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">OUR VISION</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2">屿你，<br>连接每一座<span style="color:#007aff">岛屿</span></h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">每个人都是一座孤岛，而屿你是连接它们的桥梁。在这里，你可以自由表达、深度连接、创建属于你的社交圈。从动态广场到私密聊天，从群组社区到个性化实验室——屿你提供完整而精致的社交体验。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="gap:12px;margin-top:8px;">
+      <div class="ppt-stat-card"><div class="ppt-num">30+</div><div class="ppt-label">实验室功能开关</div></div>
+      <div class="ppt-stat-card"><div class="ppt-num">50+</div><div class="ppt-label">管理后台功能</div></div>
+      <div class="ppt-stat-card"><div class="ppt-num">3</div><div class="ppt-label">平台全覆盖</div></div>
+    </div>
+  </div>
+  <div class="ppt-col ppt-col-2 ppt-reveal-right ppt-d3">
+    <div class="ppt-screenshot-wrap"><img src="第2页.png" alt="YuNi 主面板" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div style="display:none;width:100%;aspect-ratio:16/10;background:rgba(255,255,255,.45);border-radius:28px;"></div></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2 ppt-reveal-left ppt-d1">
+    <div class="ppt-screenshot-wrap"><img src="第三页.png" alt="主面板" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div style="display:none;width:100%;aspect-ratio:16/10;background:rgba(255,255,255,.45);border-radius:28px;"></div></div>
+  </div>
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">MAIN DASHBOARD</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2">一座<span style="color:#007aff">操作系统</span>般的社交面板</h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">YuNi 主面板不止是界面——它是一种体验。侧边栏导航、实时消息预览、动态流瀑布、通知角标——每个细节都经过精心打磨。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="flex-wrap:wrap;gap:8px;">
+      <span class="ppt-tech-badge">实时通知</span><span class="ppt-tech-badge">消息预览</span><span class="ppt-tech-badge">动态流</span><span class="ppt-tech-badge">主题切换</span><span class="ppt-tech-badge">暗色模式</span>
+    </div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">AUTHENTICATION</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2">令人<span style="color:#007aff">心动的</span>第一印象</h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">登录是用户的第一触点。YuNi 的登录页采用了 Apple 风格的毛玻璃表单、流畅的过渡动画和渐变背景。支持注册、登录、找回密码。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="gap:8px;"><span class="ppt-tech-badge">SHA256 加密</span><span class="ppt-tech-badge">6位展示ID</span><span class="ppt-tech-badge">头像系统</span></div>
+  </div>
+  <div class="ppt-col ppt-col-2 ppt-reveal-right ppt-d2">
+    <div class="ppt-screenshot-wrap"><img src="第4页和第5页和第9页.png" alt="登录页面" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div style="display:none;width:100%;aspect-ratio:3/4;max-width:320px;margin:0 auto;background:rgba(255,255,255,.45);border-radius:28px;"></div></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">SOCIAL FEED</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">动态广场 <span style="color:#007aff">分享你的世界</span></h2>
+  <p class="ppt-body ppt-reveal-up ppt-d3" style="margin:0 auto;">发布动态、浏览好友的精彩瞬间。点赞、收藏、评论——社交互动一气呵成。支持隐私控制。</p>
+  <div class="ppt-grid-3 ppt-reveal-up ppt-d4">
+    <div class="ppt-glass ppt-glass-sm"><div class="ppt-feature-icon">✍️</div><h3 class="ppt-h3">发布动态</h3><p style="color:#636366;font-size:14px;">文字、图片随心分享，支持隐私设置</p></div>
+    <div class="ppt-glass ppt-glass-sm"><div class="ppt-feature-icon">❤️</div><h3 class="ppt-h3">点赞收藏</h3><p style="color:#636366;font-size:14px;">互动反馈实时传递，心意不再错过</p></div>
+    <div class="ppt-glass ppt-glass-sm"><div class="ppt-feature-icon">💭</div><h3 class="ppt-h3">评论互动</h3><p style="color:#636366;font-size:14px;">深度交流从一条评论开始，支持删评管理</p></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">INSTANT MESSAGING</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2"><span style="color:#007aff">超越文字</span>的聊天体验</h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">YuNi 的即时通讯支持文字、图片、语音消息，还能分享帖子。消息支持撤回、实时送达。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="gap:8px;"><span class="ppt-tech-badge">文字消息</span><span class="ppt-tech-badge">图片分享</span><span class="ppt-tech-badge">语音消息</span><span class="ppt-tech-badge">帖子转发</span><span class="ppt-tech-badge">消息撤回</span></div>
+  </div>
+  <div class="ppt-col ppt-col-2 ppt-reveal-right ppt-d2">
+    <div class="ppt-glass" style="height:320px;display:flex;flex-direction:column;gap:12px;overflow:hidden;">
+      <div style="display:flex;align-items:center;gap:12px;padding:8px 0;border-bottom:1px solid rgba(0,0,0,.06);"><div style="width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#007aff,#5856d6);"></div><div><strong>小屿</strong><br><span style="font-size:12px;color:#007aff;">在线</span></div></div>
+      <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+        <div class="ppt-chat-bubble-left" style="animation:pptRevealUp .5s var(--spring) both;">嗨！今天天气真好</div>
+        <div class="ppt-chat-bubble-right" style="animation:pptRevealUp .5s var(--spring) .2s both;">是啊！要不要一起去公园？</div>
+        <div class="ppt-chat-bubble-left" style="animation:pptRevealUp .5s var(--spring) .4s both;">好主意！我发个定位给你</div>
+      </div>
+      <div style="display:flex;gap:8px;"><input class="ppt-chat-input" placeholder="输入消息..."><button class="ppt-btn ppt-btn-primary" style="padding:10px 20px;font-size:14px;">发送</button></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">SOCIAL GRAPH</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">好友生态 <span style="color:#007aff">真实连接</span></h2>
+  <p class="ppt-body ppt-reveal-up ppt-d3" style="margin:0 auto;">申请、接受、拒绝、删除——完整的好友生命周期管理。每一次互动都被温柔地对待。</p>
+  <div class="ppt-grid-4 ppt-reveal-up ppt-d4">
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:36px;margin-bottom:12px;">📝</div><strong>发送申请</strong><p style="font-size:13px;color:#636366;margin-top:4px;">通过ID或用户名查找</p></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:36px;margin-bottom:12px;">✅</div><strong>接受好友</strong><p style="font-size:13px;color:#636366;margin-top:4px;">一键接受申请</p></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:36px;margin-bottom:12px;">🚫</div><strong>拉黑系统</strong><p style="font-size:13px;color:#636366;margin-top:4px;">双向过滤，守护空间</p></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:36px;margin-bottom:12px;">🔍</div><strong>搜索用户</strong><p style="font-size:13px;color:#636366;margin-top:4px;">用户名/ID/帖子内容</p></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2 ppt-reveal-left ppt-d1">
+    <div class="ppt-glass" style="height:300px;display:flex;flex-direction:column;gap:12px;overflow-y:auto;">
+      <div style="padding:12px 16px;border-radius:14px;background:rgba(0,122,255,.08);border:1px solid rgba(0,122,255,.15);"><strong>周末徒步小队</strong><p style="font-size:12px;color:#636366;">12 人在线 最后消息: 明天几点集合？</p></div>
+      <div style="padding:12px 16px;border-radius:14px;background:rgba(0,0,0,.03);"><strong>游戏开黑群</strong><p style="font-size:12px;color:#636366;">8 人在线 最后消息: 今晚排位走起</p></div>
+      <div style="padding:12px 16px;border-radius:14px;background:rgba(0,0,0,.03);"><strong>读书分享会</strong><p style="font-size:12px;color:#636366;">23 人在线 最后消息: 推荐一本好书</p></div>
+      <div style="padding:12px 16px;border-radius:14px;background:rgba(0,0,0,.03);"><strong>音乐爱好者</strong><p style="font-size:12px;color:#636366;">15 人在线 最后消息: 这首新歌太好听了</p></div>
+    </div>
+  </div>
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">GROUP CHAT</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2">群组社区 <span style="color:#007aff">属于你的圈子</span></h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">创建或加入群组，和志同道合的人在一起。群聊支持多人实时消息，每个人都能找到属于自己的小圈子。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="gap:8px;"><span class="ppt-tech-badge">创建群组</span><span class="ppt-tech-badge">加入群组</span><span class="ppt-tech-badge">群聊消息</span></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">USER PROFILE</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">个性化<span style="color:#007aff">个人主页</span></h2>
+  <p class="ppt-body ppt-reveal-up ppt-d3" style="margin:0 auto;">头像、昵称、简介、免打扰模式——你可以精心打造自己在屿你的数字形象。</p>
+  <div class="ppt-row ppt-reveal-up ppt-d4" style="justify-content:center;">
+    <div class="ppt-glass ppt-glass-sm" style="width:280px;text-align:center;">
+      <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#e0c3fc,#8ec5fc);margin:0 auto 16px;display:flex;align-items:center;justify-content:center;font-size:36px;"></div>
+      <h3 style="margin:0;">Czy与团队</h3><p style="color:#636366;font-size:13px;">ID: 482931  开发者</p>
+      <p style="font-size:14px;margin-top:8px;">"用代码连接每一个有趣的灵魂"</p>
+      <div style="display:flex;gap:16px;justify-content:center;margin-top:12px;font-size:13px;color:#636366;"><span>128 动态</span><span>256 好友</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">REAL-TIME NOTIFICATIONS</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2">不错过<span style="color:#007aff">任何一次</span>互动</h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">点赞通知、评论通知、好友申请通知——实时推送到你面前。心跳轮询系统聚合未读数，让你随时掌握社交动态。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="gap:8px;"><span class="ppt-tech-badge">点赞通知</span><span class="ppt-tech-badge">评论通知</span><span class="ppt-tech-badge">好友通知</span><span class="ppt-tech-badge">免打扰</span></div>
+  </div>
+  <div class="ppt-col ppt-col-2 ppt-reveal-right ppt-d2">
+    <div class="ppt-glass" style="display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:rgba(0,122,255,.06);animation:pptRevealUp .5s var(--spring) .1s both;"><span style="font-size:24px;"></span><div><strong>小明</strong> 赞了你的动态</div><span style="margin-left:auto;font-size:12px;color:#636366;">刚刚</span></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:rgba(0,0,0,.03);animation:pptRevealUp .5s var(--spring) .25s both;"><span style="font-size:24px;"></span><div><strong>小红</strong> 评论了你的帖子</div><span style="margin-left:auto;font-size:12px;color:#636366;">5分钟前</span></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;border-radius:14px;background:rgba(0,0,0,.03);animation:pptRevealUp .5s var(--spring) .4s both;"><span style="font-size:24px;"></span><div><strong>小刚</strong> 申请加你为好友</div><span style="margin-left:auto;font-size:12px;color:#636366;">1小时前</span></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">SEARCH & DISCOVER</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2"><span style="color:#007aff">搜索发现</span>一切</h2>
+  <p class="ppt-body ppt-reveal-up ppt-d3" style="margin:0 auto;max-width:560px;">通过用户名、6位展示ID、帖子内容关键词——精准定位你要找的人或内容。</p>
+  <div class="ppt-row ppt-reveal-up ppt-d4" style="justify-content:center;">
+    <div class="ppt-glass ppt-glass-sm" style="width:100%;max-width:500px;display:flex;gap:12px;align-items:center;">
+      <span style="font-size:20px;">🔍</span><input style="flex:1;border:none;background:transparent;font-family:inherit;font-size:16px;outline:none;" placeholder="搜索用户名 / ID / 帖子内容..." readonly>
+      <span class="ppt-tech-badge" style="background:#007aff;color:#fff;">搜索</span>
+    </div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">YU NI LAB</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">实验室 <span style="color:#007aff">30+ 功能开关</span></h2>
+  <p class="ppt-body ppt-reveal-up ppt-d3" style="margin:0 auto;max-width:620px;">YuNi 实验室是给你的秘密武器。背景音乐、减少动效、隐藏时间戳、无毛玻璃模式、白色按钮模式。</p>
+  <div class="ppt-grid-4 ppt-reveal-up ppt-d4">
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">🎵</div><strong>背景音乐</strong></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">♿</div><strong>减少动效</strong></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">🕐</div><strong>隐藏时间戳</strong></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">🪟</div><strong>无毛玻璃</strong></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">🔘</div><strong>白色按钮</strong></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">🌙</div><strong>暗色模式</strong></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">⚙️</div><strong>更多设置...</strong></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;"><div style="font-size:28px;">✨</div><strong>动效增强</strong></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">ADMINISTRATION</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2">管理后台 <span style="color:#007aff">50+ 管理功能</span></h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">强大的管理面板，提供用户管理、内容审核、数据统计、系统配置等50+项功能。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="gap:8px;flex-wrap:wrap;"><span class="ppt-tech-badge">用户管理</span><span class="ppt-tech-badge">内容审核</span><span class="ppt-tech-badge">数据统计</span><span class="ppt-tech-badge">系统配置</span></div>
+  </div>
+  <div class="ppt-col ppt-col-2 ppt-reveal-right ppt-d2"><div class="ppt-screenshot-wrap"><img src="13张.png" alt="管理后台" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';"><div style="display:none;width:100%;aspect-ratio:16/10;background:rgba(255,255,255,.45);border-radius:28px;"></div></div></div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">DEPLOYMENT</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2"><span style="color:#007aff">三端</span>全覆盖</h2>
+  <p class="ppt-body ppt-reveal-up ppt-d3" style="margin:0 auto;">一次开发，多平台运行。无论是浏览器、Windows 桌面还是 Android 手机，YuNi 都能提供一致的体验。</p>
+  <div class="ppt-grid-3 ppt-reveal-up ppt-d4">
+    <div class="ppt-platform-card"><div class="ppt-platform-icon"></div><h3>Web PWA</h3><p style="color:#636366;font-size:14px;">浏览器直接访问<br>支持添加到主屏幕<br>Service Worker 离线缓存</p></div>
+    <div class="ppt-platform-card"><div class="ppt-platform-icon"></div><h3>Windows EXE</h3><p style="color:#636366;font-size:14px;">PyInstaller 打包<br>单文件 ~700MB<br>双击即用，无需环境</p></div>
+    <div class="ppt-platform-card"><div class="ppt-platform-icon"></div><h3>Android APK</h3><p style="color:#636366;font-size:14px;">Capacitor WebView<br>前端全本地化<br>API 请求走远程后端</p></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">TECHNICAL ARCHITECTURE</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">技术<span style="color:#007aff">架构</span></h2>
+  <div class="ppt-reveal-up ppt-d3" style="display:flex;flex-wrap:wrap;gap:12px;justify-content:center;max-width:700px;margin:0 auto;">
+    <span class="ppt-tech-badge" style="font-size:16px;padding:12px 24px;">Flask</span><span class="ppt-tech-badge" style="font-size:16px;padding:12px 24px;">Socket.IO</span><span class="ppt-tech-badge" style="font-size:16px;padding:12px 24px;">210+ API</span><span class="ppt-tech-badge" style="font-size:16px;padding:12px 24px;">JSON DB</span><span class="ppt-tech-badge" style="font-size:16px;padding:12px 24px;">PWA</span><span class="ppt-tech-badge" style="font-size:16px;padding:12px 24px;">SSE 推流</span><span class="ppt-tech-badge" style="font-size:16px;padding:12px 24px;">Threading</span>
+  </div>
+  <div class="ppt-glass ppt-reveal-up ppt-d4" style="max-width:700px;margin:0 auto;text-align:left;"><pre style="font-family:'SF Mono',monospace;font-size:13px;line-height:1.8;color:#1a1a2e;">Flask (app.py, ~6700行)
+  SSE Stream   fan-out push engine (/api/stream)
+  Frontend    4 HTML pages (~12k lines vanilla JS)
+  REST API    ~210+ endpoints (/api/*)
+  Socket.IO   threading / eventlet
+  JSON DB     15 JSON files
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-row">
+  <div class="ppt-col ppt-col-2">
+    <div class="ppt-mono ppt-reveal-up ppt-d1">DESIGN SYSTEM</div>
+    <h2 class="ppt-h2 ppt-reveal-up ppt-d2">Apple 级别<span style="color:#007aff">设计语言</span></h2>
+    <p class="ppt-body ppt-reveal-up ppt-d3">Liquid Glass 毛玻璃、Spring 弹性动画、Cubic Bezier 缓动曲线、统一的圆角系统和阴影层级。</p>
+    <div class="ppt-row ppt-reveal-up ppt-d4" style="gap:8px;flex-wrap:wrap;"><span class="ppt-tech-badge">毛玻璃卡片</span><span class="ppt-tech-badge">渐变背景</span><span class="ppt-tech-badge">暗色模式</span><span class="ppt-tech-badge">Spring 动效</span><span class="ppt-tech-badge">统一圆角</span><span class="ppt-tech-badge">SF 字体风格</span></div>
+  </div>
+  <div class="ppt-col ppt-col-2 ppt-reveal-right ppt-d2">
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;gap:12px;align-items:center;"><div style="width:48px;height:48px;border-radius:14px;background:linear-gradient(135deg,#e0c3fc,#8ec5fc);"></div><div style="flex:1;height:20px;border-radius:10px;background:rgba(255,255,255,.45);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.28);"></div></div>
+      <div style="height:120px;border-radius:20px;background:rgba(255,255,255,.45);backdrop-filter:blur(40px);border:1px solid rgba(255,255,255,.28);box-shadow:0 8px 32px rgba(0,0,0,.07);"></div>
+      <div style="display:flex;gap:12px;"><div style="flex:1;height:60px;border-radius:14px;background:rgba(255,255,255,.45);backdrop-filter:blur(30px);border:1px solid rgba(255,255,255,.28);"></div><div style="flex:1;height:60px;border-radius:14px;background:rgba(0,122,255,.12);border:1px solid rgba(0,122,255,.2);"></div></div>
+    </div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">SECURITY & PRIVACY</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">数据<span style="color:#007aff">安全</span>与<span style="color:#007aff">隐私</span></h2>
+  <div class="ppt-grid-3 ppt-reveal-up ppt-d3">
+    <div class="ppt-glass ppt-glass-sm"><div class="ppt-feature-icon" style="background:rgba(0,122,255,.12);">🔐</div><h3 class="ppt-h3">SHA256 加密</h3><p style="color:#636366;font-size:14px;">用户密码使用 SHA256 哈希存储，绝不保存明文</p></div>
+    <div class="ppt-glass ppt-glass-sm"><div class="ppt-feature-icon" style="background:rgba(52,199,89,.12);color:#34c759;">🛡️</div><h3 class="ppt-h3">隐私控制</h3><p style="color:#636366;font-size:14px;">动态可见范围、拉黑双向过滤、免打扰模式</p></div>
+    <div class="ppt-glass ppt-glass-sm"><div class="ppt-feature-icon" style="background:rgba(255,149,0,.12);color:#ff9500;">📦</div><h3 class="ppt-h3">数据自主</h3><p style="color:#636366;font-size:14px;">JSON 文件存储，数据可控可迁移，透明可靠</p></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">BY THE NUMBERS</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">产品<span style="color:#007aff">数据</span>一览</h2>
+  <div class="ppt-grid-4 ppt-reveal-up ppt-d3">
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">6,700+</div><div class="ppt-label">后端代码行数</div></div>
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">12,000+</div><div class="ppt-label">前端代码行数</div></div>
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">210+</div><div class="ppt-label">API 端点</div></div>
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">50+</div><div class="ppt-label">管理功能</div></div>
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">30+</div><div class="ppt-label">实验室开关</div></div>
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">15</div><div class="ppt-label">数据表</div></div>
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">4</div><div class="ppt-label">前端页面</div></div>
+    <div class="ppt-stat-card ppt-glass ppt-glass-sm"><div class="ppt-num">3</div><div class="ppt-label">平台支持</div></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">ROADMAP</div>
+  <h2 class="ppt-h2 ppt-reveal-up ppt-d2">未来<span style="color:#007aff">规划</span></h2>
+  <div class="ppt-row ppt-reveal-up ppt-d3" style="justify-content:center;gap:0;">
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;width:200px;"><div style="font-size:32px;">🎬</div><strong>v5.5</strong><p style="font-size:13px;color:#636366;">视频动态<br>语音通话<br>消息已读回执</p></div>
+    <div style="font-size:24px;color:#007aff;padding:0 8px;">-></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;width:200px;"><div style="font-size:32px;">🤖</div><strong>v6.0</strong><p style="font-size:13px;color:#636366;">AI 智能推荐<br>端到端加密<br>开放平台 API</p></div>
+    <div style="font-size:24px;color:#007aff;padding:0 8px;">-></div>
+    <div class="ppt-glass ppt-glass-sm" style="text-align:center;width:200px;"><div style="font-size:32px;">🌐</div><strong>v7.0</strong><p style="font-size:13px;color:#636366;">iOS App<br>第三方集成<br>元宇宙空间</p></div>
+  </div>
+</div></section>
+
+<section class="ppt-slide" data-bg="light"><div class="ppt-slide-inner ppt-txt-center">
+  <div class="ppt-mono ppt-reveal-up ppt-d1">GET STARTED</div>
+  <h1 class="ppt-h1 ppt-reveal-up ppt-d2">立即体验<span class="ppt-accent">屿你</span></h1>
+  <p class="ppt-body-lg ppt-reveal-up ppt-d3" style="margin:0 auto;max-width:600px;">打开浏览器，访问下方地址，即刻加入屿你宇宙。</p>
+  <div class="ppt-glass ppt-reveal-scale ppt-d4" style="display:inline-block;padding:16px 40px;"><span style="font-family:'SF Mono',monospace;font-size:20px;font-weight:600;color:#007aff;">czy001.pythonanywhere.com</span></div>
+  <div class="ppt-reveal-up ppt-d5" style="margin-top:12px;"><a href="javascript:void(0)" class="ppt-btn ppt-btn-primary" style="font-size:18px;padding:18px 48px;" onclick="goLogin()">进入屿你</a></div>
+  <p class="ppt-reveal-up ppt-d6" style="color:var(--txt-t);font-size:14px;margin-top:24px;">开发者：Czy与团队  Apple Design Inspired<br>2024 - 2026  Version 5.1</p>
+</div></section>
+
+</div><!-- /slides-wrapper -->
+</div><!-- /pptMode -->
+
+<script>(function(){var _isWebView=window.location.protocol==='file:';window._loginUrl=(_isWebView?'登录.html':'/%E7%99%BB%E5%BD%95.html')+'?from_promo=1';window.goLogin=function(){window.location.href=window._loginUrl;};})();</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+(function(){
+// ====== SCROLL MODE ======
+var nav = document.getElementById("nav");
+var isScrolled = false;
+function onScroll() {
+  var scrolled = window.scrollY > 24;
+  if (scrolled !== isScrolled) { isScrolled = scrolled; nav.classList.toggle("nav-scrolled", scrolled); }
+}
+window.addEventListener("scroll", onScroll, {passive: true});
+
+// Mobile menu
+var mb = document.getElementById("menuBtn"), mm = document.getElementById("mobileMenu"), mg = document.getElementById("menuBg");
+function mc() { mm.classList.remove("open"); }
+mb.addEventListener("click", function() { mm.classList.contains("open") ? mc() : mm.classList.add("open"); });
+mg.addEventListener("click", mc);
+mm.querySelectorAll("a").forEach(function(a) { a.addEventListener("click", mc); });
+
+// Nav logo scrolls to top
+document.querySelector(".nav-logo").addEventListener("click", function(e) {
+  e.preventDefault(); gsap.to(window, {duration: 0.8, scrollTo: {y: 0}, ease: "power3.inOut"});
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+  if (a.hasAttribute("data-modal")) return;
+  a.addEventListener("click", function(e) {
+    var id = a.getAttribute("href"); if (!id || id === "#") return;
+    var t = document.querySelector(id); if (!t) return;
+    e.preventDefault();
+    try { gsap.to(window, {duration: 0.9, scrollTo: {y: t, offsetY: 72}, ease: "power3.inOut"}); }
+    catch(err) { t.scrollIntoView({behavior: "smooth", block: "start"}); }
+  });
+});
+
+// Hero entrance
+window.playHeroEntrance = function() {
+  if (window._heroTL) { window._heroTL.kill(); }
+  var tl = gsap.timeline({defaults: {ease: "power4.out"}});
+  tl.from(".hero-badge", {duration: 0.5, opacity: 0, scale: 0.8, y: -15})
+    .from(".hero-h1", {duration: 0.8, opacity: 0, y: 36}, "-=0.35")
+    .from(".hero-p", {duration: 0.65, opacity: 0, y: 24}, "-=0.55")
+    .from(".gs-hero-btn .gs-btn", {duration: 0.5, opacity: 0, y: 20, scale: 0.9, stagger: 0.1}, "-=0.4")
+    .from(".gs-mock", {duration: 0.9, opacity: 0, y: 60, scale: 0.95}, "-=0.5")
+    .fromTo(".gs-orb", {opacity:0, scale:0.7}, {duration:0.7, opacity:1, scale:1, stagger:0.1, ease:"back.out(1.5)"}, "-=0.4");
+  window._heroTL = tl;
+  return tl;
+};
+window.playHeroEntrance();
+
+// Orbital tag floating
+setTimeout(function() {
+  gsap.utils.toArray(".gs-orb").forEach(function(tag, i) {
+    var drifts = [{x:6,y:-10,duration:5},{x:-7,y:-8,duration:5.5},{x:5,y:-12,duration:4.8},{x:-6,y:-6,duration:5.2},{x:4,y:-9,duration:4.5},{x:-5,y:-11,duration:5.8}];
+    var d = drifts[i % drifts.length];
+    gsap.to(tag, {duration:d.duration, x:d.x, y:d.y, repeat:-1, yoyo:true, ease:"sine.inOut", delay:-i*0.7});
+  });
+}, 1200);
+
+// Hero image parallax + tilt
+var heroImg = document.querySelector(".hero-imgw img");
+var heroWrap = document.getElementById("heroImgWrap");
+if (heroImg && heroWrap) {
+  gsap.to(heroImg, {duration: 0, rotateX: 1, rotateY: -1, scale: 0.98});
+  heroWrap.addEventListener("mousemove", function(e) {
+    var rect = heroWrap.getBoundingClientRect();
+    var x = (e.clientX - rect.left) / rect.width - 0.5;
+    var y = (e.clientY - rect.top) / rect.height - 0.5;
+    gsap.to(heroImg, {duration: 0.5, rotateY: x * 12, rotateX: -y * 8, scale: 1.01, ease: "power2.out"});
+  });
+  heroWrap.addEventListener("mouseleave", function() { gsap.to(heroImg, {duration: 1, rotateY: -1, rotateX: 1, scale: 0.99, ease: "power3.out"}); });
+}
+
+// ScrollTrigger animations
+gsap.utils.toArray(".gs-sec").forEach(function(el) { gsap.from(el, {scrollTrigger:{trigger:el,start:"top 88%",toggleActions:"play none none none"},duration:0.75,opacity:0,y:36,ease:"power3.out"}); });
+gsap.utils.toArray(".gs-card").forEach(function(el,i) { gsap.from(el, {scrollTrigger:{trigger:el,start:"top 88%",toggleActions:"play none none none"},duration:0.65,opacity:0,y:50,scale:.95,ease:"power3.out",delay:(i%3)*0.12}); });
+gsap.utils.toArray(".gs-tl").forEach(function(el,i) {
+  var fromLeft = i % 2 === 0;
+  gsap.from(el.querySelector(".t-step-card"), {scrollTrigger:{trigger:el,start:"top 82%",toggleActions:"play none none none"},duration:0.7,opacity:0,x:fromLeft?-40:40,ease:"power3.out"});
+  gsap.from(el.querySelector(".t-step-dot"), {scrollTrigger:{trigger:el,start:"top 82%",toggleActions:"play none none none"},duration:0.5,scale:0,ease:"back.out(2.5)"});
+});
+gsap.utils.toArray(".gs-sp").forEach(function(el,i) { gsap.from(el, {scrollTrigger:{trigger:el,start:"top 82%",toggleActions:"play none none none"},duration:0.8,opacity:0,y:60,rotation:i===0?-8:8,ease:"power3.out"}); });
+gsap.utils.toArray(".gs-comm").forEach(function(el) { gsap.from(el, {scrollTrigger:{trigger:el,start:"top 88%",toggleActions:"play none none none"},duration:0.55,opacity:0,y:24,ease:"power3.out"}); });
+gsap.utils.toArray(".gs-cav").forEach(function(el,i) { gsap.from(el, {scrollTrigger:{trigger:el.closest(".gs-comm"),start:"top 85%",toggleActions:"play none none none"},duration:0.4,opacity:0,scale:.6,ease:"power3.out",delay:i*0.06}); });
+gsap.utils.toArray(".gs-foot").forEach(function(el) { gsap.from(el, {scrollTrigger:{trigger:el,start:"top 97%",toggleActions:"play none none none"},duration:0.6,opacity:0,y:20,ease:"power2.out"}); });
+
+// Counter animation
+document.querySelectorAll("[data-count]").forEach(function(el) {
+  var target = parseFloat(el.dataset.count), isFloat = target % 1 !== 0, obj = {val: 0};
+  gsap.to(obj, {scrollTrigger:{trigger:el.closest(".stat-c"),start:"top 85%",toggleActions:"play none none none"},duration:2.2,val:target,ease:"power3.out",
+    onUpdate:function() { el.textContent = isFloat ? obj.val.toFixed(1) : Math.floor(obj.val).toLocaleString(); },
+    onComplete:function() { el.textContent = isFloat ? target.toFixed(1) : Math.floor(target).toLocaleString(); }});
+});
+
+// Button hover glow
+document.querySelectorAll(".btn-p").forEach(function(btn) {
+  btn.addEventListener("mouseenter", function() { gsap.to(btn, {duration: 0.3, boxShadow: "0 8px 30px rgba(0,0,0,0.2)", ease: "power2.out"}); });
+  btn.addEventListener("mouseleave", function() { gsap.to(btn, {duration: 0.4, boxShadow: "0 2px 8px rgba(0,0,0,0.1)", ease: "power2.out"}); });
+});
+
+// Footer links hover
+document.querySelectorAll(".ft-col a").forEach(function(link) {
+  link.addEventListener("mouseenter", function() { gsap.to(link, {duration: 0.2, x: 4, color: "var(--txt-p)", ease: "power2.out"}); });
+  link.addEventListener("mouseleave", function() { gsap.to(link, {duration: 0.25, x: 0, color: "var(--txt-t)", ease: "power2.out"}); });
+});
+
+// Nav links entrance
+var navLinkEls = document.querySelectorAll(".nav-links a, .nav-cta");
+gsap.fromTo(navLinkEls, {opacity: 0}, {duration: 0.4, opacity: 1, stagger: 0.06, delay: 0.5, ease: "power2.out"});
+document.querySelectorAll(".nav-links a, .nav-cta").forEach(function(link) {
+  link.addEventListener("mousedown", function() { gsap.to(link, {duration: 0.1, scale: 0.95, ease: "power2.out"}); });
+  link.addEventListener("mouseup", function() { gsap.to(link, {duration: 0.2, scale: 1, ease: "power2.out"}); });
+  link.addEventListener("mouseleave", function() { gsap.to(link, {duration: 0.2, scale: 1, ease: "power2.out"}); });
+});
+
+onScroll();
+
+// ====== MODAL SYSTEM ======
+window.modalData = {
+  about: {title:"关于我们",body:"<p>屿你 YuNi 诞生于 2024 年夏天，由 Czy 与一群热爱社交产品的开发者共同打造。</p><p>我们相信，好的社交产品应该像 Apple 的产品一样——极简、流畅、安全。每一个像素都经过精心打磨，每一次交互都让人感到愉悦。</p>",isCopy:false},
+  join: {title:"加入团队",body:"<p>我们是一支小而精的团队，追求极致的产品体验。</p><p>如果你热爱设计、擅长前后端开发、或者对社交产品有独到见解——欢迎加入我们。</p>",copyLabel:"czy001@pythonanywhere.com",isCopy:true},
+  qq: {title:"官方QQ群",body:"<p>欢迎加入屿你官方QQ群，在这里你可以：</p><p>· 获取最新版本下载<br>· 反馈问题与建议<br>· 参与内测体验新功能<br>· 结识更多屿你用户</p>",copyLabel:"1103666883",isCopy:true},
+  email: {title:"联系邮箱",body:"<p>有任何问题、建议或合作意向，欢迎发送邮件联系。我们通常在 24 小时内回复。</p>",copyLabel:"czy001@pythonanywhere.com",isCopy:true},
+  download: {title:"下载客户端",body:"<p>屿你目前已支持多个平台：</p><p>· <strong>Windows 桌面端</strong> - 配合全新界面，持续迭代中<br>· <strong>Android 移动端</strong> - APK 兼容性测试中，即将开放<br>· <strong>Web 网页版</strong> - 浏览器直接访问即用</p>",copyLabel:"1103666883",isCopy:true},
+  help: {title:"帮助中心",body:"<p>遇到问题？我们在这里帮你。</p><p>· 查看常见问题了解基本使用<br>· 加入官方QQ群 1103666883 获取实时帮助<br>· 发送邮件到 czy001@pythonanywhere.com</p>",isCopy:false},
+  feedback: {title:"反馈建议",body:"<p>你的每一条反馈都让屿你变得更好。</p><p>无论是功能建议、Bug 报告还是体验优化，都欢迎告诉我们。</p>",isCopy:false},
+  privacy: {title:"隐私政策",body:"<p>屿你非常重视你的隐私。</p><p>· 所有消息经加密传输<br>· 不会出售或分享你的个人数据<br>· 你可以随时导出或删除数据</p>",isCopy:false},
+  terms: {title:"服务条款",body:"<p>使用屿你即表示你同意以下条款：</p><p>· 遵守社区规范，友善交流<br>· 不发布违法、违规内容<br>· 违规用户将被限制使用</p>",isCopy:false}
+};
+
+window.openModal = function(key) {
+  _ensureModalBindings();
+  var overlay = document.getElementById("modalOverlay"), content = document.getElementById("modalContent");
+  if (!overlay || !content) return;
+  var d = window.modalData[key]; if (!d) return;
+  var html = "<h3>" + d.title + "</h3>" + d.body;
+  if (d.isCopy && d.copyLabel) {
+    html += '<div class="highlight-box"><code id="copyTarget">' + d.copyLabel + '</code></div>';
+    html += '<div class="modal-btn-row"><button class="modal-btn modal-btn-primary" id="copyBtn">复制</button><span class="copied-feedback" id="copiedMsg">已复制!</span></div>';
+  }
+  content.innerHTML = html;
+  overlay.classList.add("open"); document.body.style.overflow = "hidden";
+  var btn = document.getElementById("copyBtn");
+  if (btn) {
+    btn.addEventListener("click", function() {
+      var t = document.getElementById("copyTarget"); if (!t) return;
+      navigator.clipboard.writeText(t.textContent).then(function() {
+        var msg = document.getElementById("copiedMsg"); if (msg) { msg.classList.add("show"); setTimeout(function() { msg.classList.remove("show"); }, 1500); }
+        btn.textContent = "已复制!"; setTimeout(function() { btn.textContent = "复制"; }, 2000);
+      }).catch(function() { alert("复制失败，请手动复制：" + t.textContent); });
+    });
+  }
+};
+
+window.closeModal = function() {
+  var overlay = document.getElementById("modalOverlay");
+  if (overlay) { overlay.classList.remove("open"); document.body.style.overflow = ""; }
+};
+
+var _modalBindingsDone = false;
+function _ensureModalBindings() {
+  if (_modalBindingsDone) return;
+  var cb = document.getElementById("modalClose"); if (cb) cb.addEventListener("click", window.closeModal);
+  var ov = document.getElementById("modalOverlay"); if (ov) ov.addEventListener("click", function(e) { if (e.target === ov) window.closeModal(); });
+  _modalBindingsDone = true;
+}
+document.addEventListener("keydown", function(e) { if (e.key === "Escape") window.closeModal(); });
+
+// Dual-binding for [data-modal]
+document.addEventListener("click", function(e) { var t = e.target.closest("[data-modal]"); if (t) { e.preventDefault(); e.stopPropagation(); window.openModal(t.getAttribute("data-modal")); } }, true);
+document.querySelectorAll("[data-modal]").forEach(function(btn) { btn.addEventListener("click", function(e) { e.preventDefault(); e.stopPropagation(); window.openModal(this.getAttribute("data-modal")); }); });
+
+window.addEventListener("load", function() { ScrollTrigger.refresh(); });
+})();
+
+// ====== PPT MODE ======
+(function(){
+var slides = document.querySelectorAll("#pptMode .ppt-slide");
+var totalSlides = slides.length;
+var currentIndex = 0;
+var isTransitioning = false;
+
+var navDots = document.getElementById("navDots");
+slides.forEach(function(_, i) {
+  var dot = document.createElement("div");
+  dot.className = "ppt-nav-dot" + (i === 0 ? " active" : "");
+  dot.addEventListener("click", function() { goTo(i); });
+  navDots.appendChild(dot);
+});
+document.getElementById("totPage").textContent = String(totalSlides).padStart(2, '0');
+
+// Particle system
+var particlesContainer = document.getElementById("particles");
+for (var i = 0; i < 40; i++) {
+  var p = document.createElement("div");
+  p.className = "ppt-particle";
+  p.style.left = Math.random() * 100 + '%';
+  p.style.top = Math.random() * 100 + '%';
+  p.style.animationDelay = Math.random() * 8 + 's';
+  p.style.animationDuration = (4 + Math.random() * 8) + 's';
+  p.style.width = p.style.height = (1 + Math.random() * 3) + 'px';
+  particlesContainer.appendChild(p);
+}
+
+function updateUI() {
+  var cp = document.getElementById("curPage");
+  cp.textContent = String(currentIndex + 1).padStart(2, '0');
+  cp.classList.remove("page-flip"); void cp.offsetWidth; cp.classList.add("ppage-flip");
+  navDots.querySelectorAll(".ppt-nav-dot").forEach(function(d, i) { d.classList.toggle("active", i === currentIndex); });
+  var active = slides[currentIndex];
+  active.querySelectorAll('[class*="reveal"]').forEach(function(el) { el.style.animation = "none"; el.offsetHeight; el.style.animation = ""; });
+}
+
+function goTo(index) {
+  if (isTransitioning || index === currentIndex || index < 0 || index >= totalSlides) return;
+  isTransitioning = true;
+  var oldSlide = slides[currentIndex], newSlide = slides[index], goingDown = index > currentIndex;
+  oldSlide.classList.remove("active"); oldSlide.classList.add(goingDown ? "exit-up" : "exit-down");
+  newSlide.classList.remove("exit-up", "exit-down"); newSlide.classList.add("active");
+  currentIndex = index; updateUI();
+  setTimeout(function() { oldSlide.classList.remove("exit-up", "exit-down"); isTransitioning = false; }, 700);
+}
+
+function next() { goTo(currentIndex + 1); }
+function prev() { goTo(currentIndex - 1); }
+
+document.addEventListener("keydown", function(e) {
+  if (document.body.classList.contains("ppt-active")) {
+    if (e.key === "Escape") { switchToScroll(); return; }
+    if (e.key === "ArrowRight" || e.key === "ArrowDown" || e.key === " ") { e.preventDefault(); next(); }
+    else if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); prev(); }
+    else if (e.key === "Home") { e.preventDefault(); goTo(0); }
+    else if (e.key === "End") { e.preventDefault(); goTo(totalSlides - 1); }
+  }
+});
+
+var touchStartY = 0;
+document.addEventListener("touchstart", function(e) { touchStartY = e.touches[0].clientY; }, {passive: true});
+document.addEventListener("touchend", function(e) {
+  if (!document.body.classList.contains("ppt-active")) return;
+  var diff = touchStartY - e.changedTouches[0].clientY;
+  if (Math.abs(diff) > 50) { diff > 0 ? next() : prev(); }
+});
+
+var wheelTimeout;
+document.addEventListener("wheel", function(e) {
+  if (!document.body.classList.contains("ppt-active")) return;
+  if (wheelTimeout) return;
+  wheelTimeout = setTimeout(function() { wheelTimeout = null; }, 900);
+  if (Math.abs(e.deltaY) > 20) { e.deltaY > 0 ? next() : prev(); }
+}, {passive: true});
+
+updateUI();
+})();
+
+// ====== MODE SWITCHING ======
+function switchToPPT() {
+  var ppt = document.getElementById("pptMode"), bg = document.querySelector(".bg-animated");
+  if (bg) bg.style.opacity = "0";
+  document.body.classList.add("ppt-active");
+  ppt.classList.add("ppt-active");
+  // Force re-trigger slide 1 animations
+  var first = ppt.querySelector(".ppt-slide.active");
+  if (first) { first.querySelectorAll('[class*="reveal"]').forEach(function(el) { el.style.animation = "none"; el.offsetHeight; el.style.animation = ""; }); }
+}
+function switchToScroll() {
+  var ppt = document.getElementById("pptMode"), bg = document.querySelector(".bg-animated");
+  if (bg) bg.style.opacity = "";
+  document.body.classList.remove("ppt-active");
+  ppt.classList.remove("ppt-active");
+  gsap.to(window, {duration: 0.5, scrollTo: {y: 0}, ease: "power3.inOut"});
+  if (window.ScrollTrigger) ScrollTrigger.refresh();
+}
+</script>
+</body>
+</html>
