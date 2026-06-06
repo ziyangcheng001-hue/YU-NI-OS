@@ -1,0 +1,2 @@
+放一个叫1的收款码
+"The payment QR code file is saved as '1.png'."
