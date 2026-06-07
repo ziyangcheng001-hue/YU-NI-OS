@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>(function(){try{if(window.location.protocol==='file:'){var a=localStorage.getItem('YuNi_User')&&localStorage.getItem('authToken');if(a){window.location.replace('主面板.html');}else if(!/(\?|&)from_promo=1/.test(window.location.search)){window.location.replace('宣传.html');}}}catch(e){}})();</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="msvalidate.01" content="78C2A177C82C0CB999694DAA37E8B583">
+    <meta name="google-site-verification" content="96luAcQl-3_VqilXIBpuVeUvTudAKHkorONWxDIDuUI">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2301264922651285"
+     crossorigin="anonymous"></script>
+    <title>登录 · 屿你</title>
+    <style>
+        :root {
+            --accent: #007AFF;
+            --red: #ff3b30;
+            --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+            --curve: cubic-bezier(0.4, 0, 0.2, 1);
+            --bg-default: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 50%, #fbc2eb 100%);
+            --text-3: #aeaeb2;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: "PingFang SC", "SF Pro SC", "Noto Sans SC", sans-serif; }
+
+        #auth-overlay {
+            height: 100vh; width: 100vw;
+            display: flex; justify-content: center; align-items: center;
+            overflow: hidden;
+            background: var(--bg-default);
+            background-size: 400% 400%;
+            animation: globalFlow 15s ease infinite;
+        }
+        @keyframes globalFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .auth-card {
+            position: relative;
+            background: rgba(255,255,255,0.35);
+            backdrop-filter: blur(44px) saturate(180%);
+            -webkit-backdrop-filter: blur(44px) saturate(180%);
+            width: 420px; padding: 50px 40px;
+            border-radius: 40px;
+            box-shadow:
+                0 8px 32px rgba(0,0,0,0.06),
+                0 2px 8px rgba(0,0,0,0.04),
+                inset 0 1px 0 rgba(255,255,255,0.6),
+                inset 0 -2px 0 rgba(0,0,0,0.03);
+            border: 1px solid rgba(255,255,255,0.55);
+            text-align: center;
+            opacity: 0;
+            animation: cardPop 1s var(--spring) forwards;
+            transition: width 0.3s var(--curve), padding 0.3s var(--curve), height 0.35s var(--curve);
+            overflow: hidden;
+        }
+        .auth-card::before {
+            content: '';
+            position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 20%, rgba(255,255,255,0.3) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+            pointer-events: none; z-index: 0;
+            border-radius: inherit;
+        }
+        .auth-card > * { position: relative; z-index: 1; }
+        @keyframes cardPop {
+            0% { opacity: 0; transform: scale(0.9) translateY(40px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .card-leave {
+            animation: cardDown 0.7s var(--curve) forwards !important;
+        }
+        @keyframes cardDown {
+            to { opacity: 0; transform: scale(0.9) translateY(60px); filter: blur(20px); }
+        }
+
+        .logo { font-size: 42px; font-weight: 900; letter-spacing: -2px; margin-bottom: 6px; color: #1a1a2e; }
+        .subtitle { font-size: 14px; color: #86868b; margin-bottom: 30px; }
+
+        .input-group {
+            margin-bottom: 12px; text-align: left;
+            overflow: visible;
+        }
+        .input-group label {
+            display: block; font-size: 12px; font-weight: 600;
+            color: #86868b; margin-bottom: 5px; padding-left: 4px;
+        }
+        input[type="text"], input[type="password"], input[type="email"] {
+            width: 100%; padding: 15px 18px; border-radius: 16px;
+            border: 2.5px solid transparent;
+            background: rgba(0,0,0,0.04);
+            font-size: 15px; outline: none; transition: 0.3s var(--curve);
+        }
+        input:focus {
+            background: #fff; border-color: var(--accent);
+            transform: scale(1.02);
+            box-shadow: 0 0 0 4px rgba(0,122,255,0.15), 0 4px 20px rgba(0,122,255,0.1);
+        }
+
+        .code-row {
+            display: flex; gap: 10px;
+        }
+        .code-row input { flex: 1; min-width:0; }
+        .code-send-btn {
+            white-space: nowrap; padding: 12px 18px; border-radius: 14px;
+            border: 1px solid rgba(255,255,255,0.25);
+            background: linear-gradient(135deg, #1c1c1e, #2c2c2e);
+            box-shadow: 0 4px 14px rgba(0,0,0,0.18), inset 0 1px 0 rgba(255,255,255,0.08);
+            color: #fff;
+            font-size: 13px; font-weight: 700; cursor: pointer;
+            transition: all 0.25s var(--spring); letter-spacing: 0.02em;
+            flex-shrink: 0;
+        }
+        .code-send-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(0,0,0,0.28), inset 0 1px 0 rgba(255,255,255,0.12); }
+        .code-send-btn:active { transform: scale(0.95); }
+        .code-send-btn:disabled {
+            background: linear-gradient(135deg, #c7c7cc, #aaa);
+            border-color: transparent;
+            box-shadow: none;
+            cursor: not-allowed; transform: none;
+        }
+
+        .btn-main {
+            width: 100%; padding: 16px; border-radius: 20px; border: none;
+            background: #000; color: #fff;
+            font-size: 16px; font-weight: 600;
+            cursor: pointer; transition: 0.3s var(--spring);
+            margin-top: 8px;
+        }
+        .btn-main:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .btn-main:active { transform: scale(0.97); }
+        .btn-main.secondary {
+            background: transparent; color: var(--accent);
+            border: 1.5px solid var(--accent);
+        }
+
+        .agreement-box {
+            margin: 6px 0 16px 0; font-size: 12px;
+            color: rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .agreement-box input { width: 16px; height: 16px; cursor: pointer; }
+        .agreement-box a { color: var(--accent); text-decoration: none; font-weight: 600; }
+
+        .switch-row {
+            margin-top: 20px; font-size: 13px; color: #86868b;
+        }
+        .switch-row a {
+            color: var(--accent); cursor: pointer; text-decoration: none; font-weight: 600;
+        }
+
+        .fade-section {
+            transition: opacity 0.28s var(--curve), transform 0.28s var(--curve);
+        }
+
+        .toast {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            background: rgba(0,0,0,0.85); color: #fff;
+            padding: 12px 24px; border-radius: 20px; font-size: 14px;
+            z-index: 999; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s; backdrop-filter: blur(10px);
+        }
+        .toast.show { opacity: 1; }
+        .toast.error { background: rgba(255,59,48,0.9); }
+
+        .srv-dot {
+            display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+            background: #ff3b30; vertical-align: middle; margin-left: 4px;
+        }
+
+        #disclaimer-overlay {
+            position: fixed; inset: 0; z-index: 999;
+            display: none; align-items: center; justify-content: center;
+            backdrop-filter: blur(0px); transition: 0.6s var(--curve);
+            background: rgba(0,0,0,0);
+        }
+        #disclaimer-card {
+            width: 90%; max-width: 480px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(40px);
+            border-radius: 35px; padding: 40px;
+            transform: scale(0.85); opacity: 0;
+            transition: 0.5s var(--spring);
+            border: 1px solid rgba(255,255,255,0.4);
+            box-shadow: 0 40px 80px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 768px) {
+            .auth-card { width: 92%; padding: 30px 20px; border-radius: 28px; max-height: 90vh; overflow-y: auto; }
+            .logo { font-size: 32px; }
+            .subtitle { font-size: 13px; margin-bottom: 22px; }
+            input[type="text"], input[type="password"], input[type="email"] { padding: 13px 15px; font-size: 14px; }
+            .btn-main { padding: 14px; font-size: 15px; }
+            #disclaimer-card { width: 94%; padding: 24px 18px; border-radius: 24px; }
+            #disclaimer-card div { height: 200px; font-size: 13px; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="auth-overlay">
+    <div class="auth-card" id="main-card">
+        <div class="logo">屿你</div>
+
+        <!-- === MODE: LOGIN === -->
+        <div id="section-login" class="fade-section">
+            <div class="subtitle">
+                探索属于你的数字岛屿
+                <span class="srv-dot" id="srv-status" title="检测服务器..."></span>
+            </div>
+            <div class="input-group"><label>邮箱或用户名</label><input type="text" id="login-user" placeholder="输入邮箱或用户名" autocomplete="off"></div>
+            <div class="input-group"><label>密码</label><input type="password" id="login-pass" placeholder="输入密码" onkeydown="if(event.key==='Enter')doLogin()"></div>
+            <div class="agreement-box">
+                <input type="checkbox" id="login-agree-check">
+                <span>登录即代表同意 <a href="javascript:void(0)" onclick="showDisclaimer()">使用说明与免责声明</a></span>
+            </div>
+            <button class="btn-main" id="login-btn" onclick="doLogin()">立即登录</button>
+            <div class="switch-row">
+                还没有账号？<a onclick="switchTo('register')">点此注册</a>
+                &nbsp;|&nbsp; <a onclick="switchTo('recover')">找回密码</a>
+            </div>
+        </div>
+
+        <!-- === MODE: REGISTER (all fields in one screen) === -->
+        <div id="section-register" class="fade-section" style="display:none;">
+            <div class="subtitle">创建一个新账号以开启旅程</div>
+            <div class="input-group"><label>你的名字</label><input type="text" id="reg-name" placeholder="给自己起个名字" autocomplete="off"></div>
+            <div class="input-group"><label>邮箱 <span style="font-size:11px;color:var(--text-3);font-weight:400;">(选填，不填可直接注册)</span></label><input type="email" id="reg-email" placeholder="输入你的邮箱地址（可不填）" autocomplete="off"></div>
+            <div class="input-group"><label>设置密码</label><input type="password" id="reg-pass" placeholder="至少6位密码"></div>
+            <div class="input-group">
+                <label>验证码</label>
+                <div class="code-row">
+                    <input type="text" id="reg-code" placeholder="输入6位验证码" maxlength="6" autocomplete="off" onkeydown="if(event.key==='Enter')doRegisterFinal()">
+                    <button class="code-send-btn" id="reg-send-code-btn" onclick="doSendRegCode()">发送验证码</button>
+                </div>
+            </div>
+            <div class="agreement-box">
+                <input type="checkbox" id="agree-check">
+                <span>我已阅读并同意 <a href="javascript:void(0)" onclick="showDisclaimer()">使用说明与免责声明</a></span>
+            </div>
+            <button class="btn-main" id="reg-submit-btn" onclick="doRegisterFinal()">注册</button>
+            <div class="switch-row">已有账号？<a onclick="switchTo('login')">去登录</a></div>
+        </div>
+
+        <!-- === MODE: RECOVER (all fields in one screen) === -->
+        <div id="section-recover" class="fade-section" style="display:none;">
+            <div class="subtitle">输入注册邮箱以找回密码</div>
+            <div class="input-group"><label>注册邮箱</label><input type="email" id="recover-email" placeholder="输入你注册时使用的邮箱" autocomplete="off"></div>
+            <div class="input-group">
+                <label>验证码</label>
+                <div class="code-row">
+                    <input type="text" id="recover-code" placeholder="输入6位验证码" maxlength="6" autocomplete="off">
+                    <button class="code-send-btn" id="recover-send-code-btn" onclick="doRecoverSend()">发送验证码</button>
+                </div>
+            </div>
+            <div class="input-group"><label>新密码</label><input type="password" id="recover-new-pass" placeholder="设置新密码（至少6位）" onkeydown="if(event.key==='Enter')doRecoverReset()"></div>
+            <div class="agreement-box">
+                <input type="checkbox" id="recover-agree-check">
+                <span>我已阅读并同意 <a href="javascript:void(0)" onclick="showDisclaimer()">使用说明与免责声明</a></span>
+            </div>
+            <button class="btn-main" onclick="doRecoverReset()">重置密码</button>
+            <div class="switch-row"><a onclick="switchTo('login')">返回登录</a></div>
+        </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <div id="disclaimer-overlay">
+        <div id="disclaimer-card">
+            <h2 style="text-align:center; font-weight:800;">网站使用说明 & 免责声明</h2>
+            <div style="height:280px; overflow-y:auto; font-size:14px; line-height:1.8; color:#424245; text-align:left; margin:20px 0; padding-right:10px;">
+                <p><strong>欢迎使用「屿你」—— 在继续之前，请仔细阅读以下条款。</strong></p><br>
+                <p>1. 用户行为责任：您在本平台发布的所有内容（包括但不限于文字、图片、头像、动态、评论及私信），均由您本人独立承担全部法律责任。请勿发布任何违法、侵权、淫秽、暴力、骚扰或危害他人的信息。</p>
+                <p>2. 平台免责声明：屿你仅为用户提供网络社交平台服务，不对用户间发生的任何交友、互动、线下会面、交易等行为提供任何形式的担保或保证。由此产生的一切纠纷、人身伤害或财产损失，本平台不承担任何责任。</p>
+                <p>3. 数据与隐私：我们将尽力保障服务的连续性与数据安全，但因不可抗力（自然灾害、政府行为、网络攻击等）导致的服务中断或数据丢失，本平台不承担责任。我们不会主动向第三方泄露您的个人信息，法律法规另有规定的除外。</p>
+                <p>4. 内容审核与处置：我们有权但无义务对用户发布的内容进行审查。如发现违规内容，本平台有权在不事先通知的情况下删除相关内容、限制功能或永久封禁账号。</p>
+                <p>5. 知识产权：用户对其原创内容保有著作权。您授予屿你在平台内展示、传播您发布的内容的非独占性权利。未经权利人许可，他人不得转载或以其他方式使用您的原创内容。</p>
+                <p>6. 条款变更：本声明条款可能随时修改，修订后的条款一经在本页面公布即生效。您继续使用本网站服务即视为您已阅读并接受修改后的全部条款。</p>
+                <hr style="margin:20px 0; border:none; border-top:1px solid rgba(0,0,0,0.1);">
+                <p style="font-weight:bold;color:#d63031;">如您不同意本声明的任何条款，请立即停止注册并停止使用本网站的全部服务。</p>
+            </div>
+            <button class="btn-main" onclick="hideDisclaimer()">我已阅读并知晓</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+                (e.ctrlKey && (e.key === 'u' || e.key === 'U' || e.key === 's' || e.key === 'S'))) {
+                e.preventDefault();
+                return false;
+            }
+        });
+        console.log('%c⚠️ 请勿在此处粘贴未知代码', 'color:red;font-size:30px;');
+        console.log('%c如果你被引导至此处，请立即关闭窗口', 'color:#333;font-size:16px;');
+    })();
+
+    const isWebView = window.location.protocol === 'file:';
+    const API = (isWebView && localStorage.getItem('YuNi_Server'))
+        ? localStorage.getItem('YuNi_Server')
+        : 'https://czy001.pythonanywhere.com/api';
+    const DASHBOARD_URL = (isWebView) ? '主面板.html' : '/panel';
+    let currentMode = 'login';
+    let resendTimer = null;
+    let resendCountdown = 0;
+    let pendingRegEmail = '';
+    let pendingRecoverEmail = '';
+    let _regCodeSent = false;
+    let _disclaimerTimer = null;
+
+    function toast(msg, isError) {
+        const el = document.getElementById('toast');
+        el.textContent = msg;
+        el.classList.add('show');
+        if (isError) el.classList.add('error');
+        else el.classList.remove('error');
+        clearTimeout(el._t);
+        el._t = setTimeout(() => { el.classList.remove('show'); }, 2500);
+    }
+
+    (function pingServer() {
+        const dot = document.getElementById('srv-status');
+        fetch(API + '/ping', { method: 'GET' })
+            .then(r => r.ok ? (dot.style.background = '#34c759', dot.title = '服务器在线') : Promise.reject(new Error('Server responded '+r.status)))
+            .catch(() => { dot.style.background = '#ff3b30'; dot.title = '服务器离线'; });
+    })();
+
+    function showDisclaimer() {
+        const overlay = document.getElementById('disclaimer-overlay');
+        const card = document.getElementById('disclaimer-card');
+        if (_disclaimerTimer) { clearTimeout(_disclaimerTimer); _disclaimerTimer = null; }
+        overlay.style.display = 'flex';
+        requestAnimationFrame(() => {
+            overlay.style.background = 'rgba(0,0,0,0.3)';
+            overlay.style.backdropFilter = 'blur(15px)';
+            card.style.transform = 'scale(1)';
+            card.style.opacity = '1';
+        });
+    }
+    function hideDisclaimer() {
+        const overlay = document.getElementById('disclaimer-overlay');
+        const card = document.getElementById('disclaimer-card');
+        card.style.transform = 'scale(0.85)';
+        card.style.opacity = '0';
+        overlay.style.background = 'rgba(0,0,0,0)';
+        overlay.style.backdropFilter = 'blur(0px)';
+        _disclaimerTimer = setTimeout(() => { overlay.style.display = 'none'; _disclaimerTimer = null; }, 500);
+    }
+
+    function switchTo(mode) {
+        const sections = {
+            'login': 'section-login', 'register': 'section-register',
+            'recover': 'section-recover',
+        };
+        if (mode === currentMode) return;
+        const card = document.getElementById('main-card');
+        const cur = document.getElementById(sections[currentMode]);
+        const target = document.getElementById(sections[mode]);
+        if (!target) return;
+
+        const curH = card.offsetHeight;
+        card.style.height = curH + 'px';
+        card.style.transition = 'none';
+
+        if (cur) {
+            cur.style.transition = 'none';
+            cur.style.opacity = '0';
+            cur.style.display = 'none';
+        }
+
+        target.style.display = 'block';
+        target.style.transition = 'none';
+        target.style.opacity = '0';
+        target.style.transform = 'translateY(16px)';
+        target.style.pointerEvents = 'auto';
+        currentMode = mode;
+
+        card.style.height = 'auto';
+        card.style.transition = 'none';
+        const newH = card.offsetHeight;
+        card.style.height = curH + 'px';
+
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                card.style.transition = 'height 0.4s var(--curve)';
+                card.style.height = newH + 'px';
+                target.style.transition = 'opacity 0.35s var(--curve), transform 0.35s var(--curve)';
+                target.style.opacity = '';
+                target.style.transform = '';
+            });
+        });
+
+        setTimeout(() => {
+            card.style.transition = '';
+            card.style.height = '';
+            if (mode === 'register') { resetRegisterForm(); document.getElementById('reg-name').focus(); }
+            if (mode === 'login') document.getElementById('login-user').focus();
+            if (mode === 'recover') { resetRecoverForm(); document.getElementById('recover-email').focus(); }
+        }, 420);
+    }
+
+    function resetRegisterForm() {
+        document.getElementById('reg-name').value = '';
+        document.getElementById('reg-email').value = '';
+        document.getElementById('reg-pass').value = '';
+        document.getElementById('reg-code').value = '';
+        document.getElementById('agree-check').checked = false;
+        document.getElementById('reg-send-code-btn').textContent = '发送验证码';
+        document.getElementById('reg-send-code-btn').disabled = false;
+        pendingRegEmail = '';
+        _regCodeSent = false;
+        if (resendTimer) clearTimeout(resendTimer);
+    }
+
+    function resetRecoverForm() {
+        document.getElementById('recover-email').value = '';
+        document.getElementById('recover-code').value = '';
+        document.getElementById('recover-new-pass').value = '';
+        document.getElementById('recover-agree-check').checked = false;
+        document.getElementById('recover-send-code-btn').textContent = '发送验证码';
+        document.getElementById('recover-send-code-btn').disabled = false;
+        pendingRecoverEmail = '';
+        if (resendTimer) clearTimeout(resendTimer);
+    }
+
+    let cooldownTimer = null;
+
+    function startCooldownCountdown(btnId, seconds) {
+        const btn = document.getElementById(btnId);
+        btn.disabled = true;
+        let remaining = seconds;
+        function tick() {
+            if (remaining <= 0) { btn.textContent = '发送验证码'; btn.disabled = false; return; }
+            const m = Math.floor(remaining / 60);
+            const s = remaining % 60;
+            btn.textContent = m > 0 ? m + '分' + s + '秒' : s + '秒';
+            remaining--;
+            cooldownTimer = setTimeout(tick, 1000);
+        }
+        if (cooldownTimer) clearTimeout(cooldownTimer);
+        tick();
+    }
+
+    function startResendCountdown(btnId) {
+        resendCountdown = 60;
+        const btn = document.getElementById(btnId);
+        btn.disabled = true;
+        function tick() {
+            if (resendCountdown <= 0) { btn.textContent = '重新发送'; btn.disabled = false; return; }
+            btn.textContent = resendCountdown + 's';
+            resendCountdown--;
+            resendTimer = setTimeout(tick, 1000);
+        }
+        if (resendTimer) clearTimeout(resendTimer);
+        tick();
+    }
+
+    function _safeSet(k,v){ try{localStorage.setItem(k,v);}catch(e){} }
+    function _safeGet(k){ try{return localStorage.getItem(k);}catch(e){return null;} }
+
+    async function doSendRegCode() {
+        if (resendCountdown > 0) return;
+        const name = document.getElementById('reg-name').value.trim();
+        const email = document.getElementById('reg-email').value.trim();
+        const pass = document.getElementById('reg-pass').value;
+        const agree = document.getElementById('agree-check').checked;
+        if (!name) return toast('请输入你的名字', true);
+        if (!pass) return toast('请设置密码', true);
+        if (pass.length < 6) return toast('密码至少6位', true);
+        if (!agree) { toast('请先阅读并勾选同意免责声明', true); showDisclaimer(); return; }
+        if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast('邮箱格式不正确', true);
+        if (!email && !confirm('你确定不使用邮箱注册吗？没有邮箱无法找回密码。')) return;
+        const btn = document.getElementById('reg-send-code-btn');
+        btn.disabled = true;
+        btn.textContent = '处理中...';
+        // 没填邮箱 → 直接注册，跳过验证码
+        if (!email) {
+            try {
+                const res = await fetch(API + '/register/direct', {
+                    method: 'POST', headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pass: pass, nickname: name })
+                });
+                const result = await res.json();
+                if (res.ok && result.token && result.uid) {
+                    _safeSet('authToken', result.token);
+                    _safeSet('YuNi_User', result.uid);
+                    toast('欢迎登岛！');
+                    const card = document.getElementById('main-card');
+                    if (card) card.classList.add('card-leave');
+                    setTimeout(() => { window.location.href = DASHBOARD_URL; }, 700);
+                } else { toast(result.msg || '注册失败', true); btn.disabled = false; btn.textContent = '发送验证码'; }
+            } catch (e) { toast('网络错误: ' + (e.message || ''), true); btn.disabled = false; btn.textContent = '发送验证码'; }
+            return;
+        }
+        // 有邮箱 → 发验证码
+        try {
+            const res = await fetch(API + '/register', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email, pass: pass, nickname: name })
+            });
+            const result = await res.json();
+            if (res.ok) {
+                pendingRegEmail = email;
+                _regCodeSent = true;
+                startResendCountdown('reg-send-code-btn');
+                document.getElementById('reg-code').focus();
+                toast(result.msg || '验证码已发送');
+            } else if (result.cooldown) {
+                startCooldownCountdown('reg-send-code-btn', result.cooldown);
+                toast(result.msg, true);
+            } else { toast(result.msg || '发送失败', true); }
+        } catch (e) { toast('网络错误: ' + (e.message || ''), true); }
+        if (!_regCodeSent) { btn.disabled = false; btn.textContent = '发送验证码'; }
+    }
+
+    async function doLogin() {
+        const user = document.getElementById('login-user').value.trim();
+        const pass = document.getElementById('login-pass').value;
+        const agree = document.getElementById('login-agree-check').checked;
+        if (!user || !pass) return toast('请填写完整信息', true);
+        if (!agree) { toast('请先阅读并勾选同意免责声明', true); showDisclaimer(); return; }
+        const btn = document.getElementById('login-btn');
+        btn.disabled = true;
+        btn.textContent = '登录中...';
+        try {
+            const res = await fetch(API + '/login', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ user: user, pass: pass })
+            });
+            const result = await res.json();
+            if (res.ok) {
+                if (result.token && result.uid) {
+                    _safeSet('authToken', result.token);
+                    _safeSet('YuNi_User', result.uid);
+                    const card = document.getElementById('main-card');
+                    if (card) card.classList.add('card-leave');
+                    setTimeout(() => { window.location.href = DASHBOARD_URL; }, 700);
+                } else { toast('登录响应异常，请重试', true); btn.disabled = false; btn.textContent = '立即登录'; }
+            } else if (res.status === 403) {
+                toast('⛔ 账号已被封禁\n' + result.msg, true); btn.disabled = false; btn.textContent = '立即登录';
+            } else if (result.can_recover) {
+                toast(result.msg + '。如需找回密码请点击"找回密码"', true); btn.disabled = false; btn.textContent = '立即登录';
+            } else { toast(result.msg || '登录失败', true); btn.disabled = false; btn.textContent = '立即登录'; }
+        } catch (e) {
+            document.getElementById('srv-status').style.background = '#ff3b30';
+            toast('后端异常，请检查服务器\n' + (e.message || '网络错误'), true);
+            btn.disabled = false; btn.textContent = '立即登录';
+        }
+    }
+
+    async function doRegisterFinal() {
+        if (!pendingRegEmail) return toast('请先获取验证码', true);
+        const code = document.getElementById('reg-code').value.trim();
+        if (!code || code.length !== 6) return toast('请输入6位验证码', true);
+        if (!_regCodeSent) return toast('请先点击"发送验证码"获取验证码', true);
+        const btn = document.getElementById('reg-submit-btn');
+        btn.disabled = true;
+        btn.textContent = '验证中...';
+        try {
+            const res = await fetch(API + '/verify', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: pendingRegEmail, code: code })
+            });
+            const result = await res.json();
+            if (res.ok) {
+                if (result.token && result.uid) {
+                    _safeSet('authToken', result.token);
+                    _safeSet('YuNi_User', result.uid);
+                    toast('欢迎登岛！');
+                    const card = document.getElementById('main-card');
+                    if (card) card.classList.add('card-leave');
+                    setTimeout(() => { window.location.href = DASHBOARD_URL; }, 700);
+                } else { toast('注册完成，请登录'); switchTo('login'); btn.disabled = false; btn.textContent = '完成注册'; }
+            } else { toast(result.msg || '验证失败', true); btn.disabled = false; btn.textContent = '完成注册'; }
+        } catch (e) { toast('网络错误: ' + (e.message || ''), true); btn.disabled = false; btn.textContent = '完成注册'; }
+    }
+
+    async function doRecoverSend() {
+        const email = document.getElementById('recover-email').value.trim();
+        if (!email) return toast('请输入注册邮箱', true);
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast('邮箱格式不正确', true);
+        if (resendCountdown > 0) return;
+        try {
+            const res = await fetch(API + '/recover/send', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: email })
+            });
+            const result = await res.json();
+            if (res.ok) {
+                pendingRecoverEmail = email;
+                startResendCountdown('recover-send-code-btn');
+                document.getElementById('recover-code').focus();
+                toast(result.msg || '验证码已发送');
+            } else if (result.cooldown) {
+                startCooldownCountdown('recover-send-code-btn', result.cooldown);
+                toast(result.msg, true);
+            } else { toast(result.msg || '发送失败', true); }
+        } catch (e) { toast('网络错误: ' + (e.message || ''), true); }
+    }
+
+    async function doRecoverReset() {
+        if (!pendingRecoverEmail) return toast('请先获取验证码', true);
+        const code = document.getElementById('recover-code').value.trim();
+        const newPass = document.getElementById('recover-new-pass').value;
+        const agree = document.getElementById('recover-agree-check').checked;
+        if (!code || code.length !== 6) return toast('请输入6位验证码', true);
+        if (!newPass || newPass.length < 6) return toast('新密码至少6位', true);
+        if (!agree) { toast('请先阅读并勾选同意免责声明', true); showDisclaimer(); return; }
+        try {
+            const res = await fetch(API + '/recover/reset', {
+                method: 'POST', headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: pendingRecoverEmail, code: code, new_pass: newPass })
+            });
+            const result = await res.json();
+            if (res.ok) { toast('密码已重置，请登录'); switchTo('login'); }
+            else { toast(result.msg || '重置失败', true); }
+        } catch (e) { toast('网络错误: ' + (e.message || ''), true); }
+    }
+
+</script>
+</body>
+</html>
