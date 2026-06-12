@@ -51,4 +51,6 @@ This project is open-sourced under the **MIT License**. You are free to conduct 
 
 如果您认可 Yu-Ni OS 的开源设计理念并希望支持后续的演进，欢迎通过扫描下方渠道提供捐赠：
 If you endorse the open-source design philosophy of Yu-Ni OS and wish to support its future evolution, you are welcome to scan the channel below to make a donation:
+USDT: TRC20:TBQ7mRU18cEKv1ABwwSbNrgyyBhczAtGks BSC:0xfa21c5a56231680a0b655c3be9d81242764f7c21
+or：
 <img width="1242" height="1686" alt="1" src="https://github.com/user-attachments/assets/05dbf42a-fbb1-42f4-9740-0119856f7ae1" />
